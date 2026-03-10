@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "grid-financing"
+version = "0.1.0"
+description = "Notebook-first analysis toolkit for EU interconnection financing triage."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "openpyxl>=3.1",
+  "pandas>=2.2",
+  "plotly>=6.0",
+  "requests>=2.32",
+]
+
+[project.optional-dependencies]
+dev = [
+  "ipykernel>=6.29",
+  "pytest>=8.3",
+]
+entsoe = [
+  "entsoe-py>=0.6",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
