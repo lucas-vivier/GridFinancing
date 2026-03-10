@@ -53,6 +53,15 @@ def test_classification_ignores_social_bcr_and_applies_financing_defaults() -> N
             },
             {
                 "project_id": 2,
+                "commercial_ratio": 0.80,
+                "credit_constrained": False,
+                "social_bcr": 2.0,
+                "capex_meur": 100,
+                "cohesion_country_a": False,
+                "cohesion_country_b": False,
+            },
+            {
+                "project_id": 3,
                 "commercial_ratio": 0.20,
                 "credit_constrained": True,
                 "social_bcr": 0.2,
@@ -65,5 +74,9 @@ def test_classification_ignores_social_bcr_and_applies_financing_defaults() -> N
     )
     result = classify_projects(df)
     assert result.loc[result["project_id"] == 1, "financing_track"].item() == TRACK_1
-    assert result.loc[result["project_id"] == 2, "financing_track"].item() == TRACK_3
-    assert result.loc[result["project_id"] == 2, "estimated_cef_grant_meur"].item() == 85
+    assert result.loc[result["project_id"] == 2, "financing_track"].item() == TRACK_2
+    assert result.loc[result["project_id"] == 2, "estimated_cef_grant_meur"].item() == 0
+    assert result.loc[result["project_id"] == 2, "estimated_eib_loan_meur"].item() == 0
+    assert result.loc[result["project_id"] == 2, "estimated_tso_balance_sheet_meur"].item() == 100
+    assert result.loc[result["project_id"] == 3, "financing_track"].item() == TRACK_3
+    assert result.loc[result["project_id"] == 3, "estimated_cef_grant_meur"].item() == 85

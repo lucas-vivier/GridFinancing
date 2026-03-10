@@ -6,10 +6,10 @@ import pandas as pd
 
 DEFAULT_DISCOUNT_RATE = 0.05
 DEFAULT_ASSET_LIFETIME_YEARS = 25
-DEFAULT_UTILIZATION_FACTOR = 0.50
+DEFAULT_UTILIZATION_FACTOR = 0.30
 DEFAULT_CREDIT_THRESHOLD = 0.15
 DEFAULT_DISCOUNT_SENSITIVITIES = (0.04, 0.05, 0.06)
-DEFAULT_UTILIZATION_SENSITIVITIES = (0.50, 0.65, 0.80)
+DEFAULT_UTILIZATION_SENSITIVITIES = (0.30, 0.50, 0.70)
 DEFAULT_CREDIT_THRESHOLDS = (0.10, 0.15, 0.20)
 
 SOCIAL_BCR_SOURCE_COLUMNS = (
@@ -98,6 +98,7 @@ def calculate_project_metrics(
     df["discount_rate"] = discount_rate
     df["asset_lifetime_years"] = asset_lifetime_years
     df["utilization_factor"] = utilization_factor
+    df["congestion_rate"] = utilization_factor
     df["credit_threshold"] = credit_threshold
     df["capital_recovery_factor"] = capital_recovery_factor(discount_rate, asset_lifetime_years)
     df["annualized_capex_meur_per_year"] = annualized_capex(df["capex_meur"], discount_rate, asset_lifetime_years)

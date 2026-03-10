@@ -79,7 +79,8 @@ def test_calculate_project_metrics_populates_core_columns() -> None:
     )
     result = calculate_project_metrics(df)
     row = result.iloc[0]
-    assert math.isclose(row["utilization_factor"], 0.5, rel_tol=1e-9)
+    assert math.isclose(row["utilization_factor"], 0.3, rel_tol=1e-9)
+    assert math.isclose(row["congestion_rate"], 0.3, rel_tol=1e-9)
     assert row["annualized_capex_meur_per_year"] > 0
     assert row["estimated_congestion_rent_meur_per_year"] > 0
     assert row["congestion_rent_basis"] == "hourly_price_sum"

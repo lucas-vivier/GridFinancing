@@ -41,7 +41,7 @@ def estimate_financing_stack(
     if financing_track == TRACK_1:
         cef_pct, eib_pct, private_pct, tso_pct = 0.0, 0.0, 1.0, 0.0
     elif financing_track == TRACK_2:
-        cef_pct, eib_pct, private_pct, tso_pct = 0.30, 0.25, 0.0, 0.45
+        cef_pct, eib_pct, private_pct, tso_pct = 0.0, 0.0, 0.0, 1.0
     elif financing_track == TRACK_3:
         cef_pct = float(cef_grant_pct_override) / 100 if not pd.isna(cef_grant_pct_override) else (0.85 if cohesion_country else 0.50)
         eib_pct, private_pct = 0.20, 0.0

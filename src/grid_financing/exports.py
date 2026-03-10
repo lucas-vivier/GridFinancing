@@ -8,6 +8,18 @@ import plotly.express as px
 from .classification import TRACK_1, TRACK_2, TRACK_3
 from .source_registry import PROJECT_ROOT
 
+TRACK_LABELS = {
+    TRACK_1: "Track 1: Market-financed",
+    TRACK_2: "Track 2: TSO-financed",
+    TRACK_3: "Track 3: Targeted EU support",
+}
+
+TRACK_AXIS_LABELS = {
+    TRACK_1: "Track 1<br>Market-financed",
+    TRACK_2: "Track 2<br>TSO-financed",
+    TRACK_3: "Track 3<br>Targeted EU support",
+}
+
 
 def ensure_output_dirs(base_path: Path = PROJECT_ROOT) -> dict[str, Path]:
     paths = {
@@ -64,10 +76,27 @@ def build_aggregate_summary(project_df: pd.DataFrame) -> pd.DataFrame:
 
 
 def build_triage_scatter_dataset(project_df: pd.DataFrame) -> pd.DataFrame:
-    return project_df[
+    scatter = project_df.copy()
+    for column in ("country_a", "country_b"):
+        if column not in scatter.columns:
+            scatter[column] = pd.NA
+
+    scatter["corridor_label"] = scatter.apply(
+        lambda row: (
+            f"{row['country_a']} - {row['country_b']}"
+            if pd.notna(row.get("country_a")) and pd.notna(row.get("country_b"))
+            else row.get("project_name")
+        ),
+        axis=1,
+    )
+
+    return scatter[
         [
             "project_id",
             "project_name",
+            "country_a",
+            "country_b",
+            "corridor_label",
             "commercial_ratio",
             "credit_constraint_score",
             "capex_meur",
@@ -88,12 +117,14 @@ def build_financing_stack_dataset(summary_df: pd.DataFrame) -> pd.DataFrame:
     )
     melted["financing_component"] = melted["financing_component"].map(
         {
-            "total_cef_beur": "CEF grant",
-            "total_eib_beur": "EIB loan",
+            "total_cef_beur": "CEF grants",
+            "total_eib_beur": "EIB loans",
             "total_private_beur": "Private capital",
             "total_tso_beur": "TSO balance sheet",
         }
     )
+    melted["financing_track_label"] = melted["financing_track"].map(TRACK_AXIS_LABELS)
+    melted["financing_track_display"] = melted["financing_track"].map(TRACK_LABELS)
     return melted
 
 
@@ -125,15 +156,9 @@ def export_outputs(project_df: pd.DataFrame, *, base_path: Path = PROJECT_ROOT) 
         ]
         .copy()
         .assign(
-            financing_track_display=lambda df: df["financing_track"].map(
-                {
-                    TRACK_1: "Track 1: Market-financed",
-                    TRACK_2: "Track 2: Regulated + CBCA",
-                    TRACK_3: "Track 3: Targeted EU support",
-                }
-            ),
+            financing_track_display=lambda df: df["financing_track"].map(TRACK_LABELS),
             commercial_ratio_display=lambda df: df["commercial_ratio"].clip(upper=10),
-            credit_constraint_score_display=lambda df: df["credit_constraint_score"].clip(upper=0.5),
+            credit_constraint_score_display=lambda df: df["credit_constraint_score"].clip(upper=1.0),
         )
     )
     scatter_fig = px.scatter(
@@ -142,42 +167,79 @@ def export_outputs(project_df: pd.DataFrame, *, base_path: Path = PROJECT_ROOT) 
         y="credit_constraint_score_display",
         size="capex_meur",
         color="financing_track_display",
-        hover_name="project_name",
-        hover_data={
-            "commercial_ratio": ":.2f",
-            "credit_constraint_score": ":.3f",
-            "commercial_ratio_display": False,
-            "credit_constraint_score_display": False,
-        },
+        hover_name="corridor_label",
+        custom_data=[
+            "project_name",
+            "commercial_ratio",
+            "credit_constraint_score",
+            "social_bcr",
+            "capex_meur",
+        ],
         title="Financing triage scatter",
         labels={
-            "commercial_ratio_display": "Commercial viability ratio (capped at 10 for display)",
-            "credit_constraint_score_display": "Binding credit-constraint score (capped at 0.5)",
+            "project_name": "Project",
+            "commercial_ratio": "Commercial viability ratio",
+            "credit_constraint_score": "Binding credit-constraint score",
+            "social_bcr": "Social BCR",
+            "capex_meur": "CAPEX (MEUR)",
+            "commercial_ratio_display": "Commercial viability ratio",
+            "credit_constraint_score_display": "Binding credit-constraint score",
             "financing_track_display": "Financing track",
         },
         category_orders={
-            "financing_track_display": [
-                "Track 1: Market-financed",
-                "Track 2: Regulated + CBCA",
-                "Track 3: Targeted EU support",
-            ]
+            "financing_track_display": list(TRACK_LABELS.values())
         },
     )
     scatter_fig.add_vline(x=1.0)
     scatter_fig.add_hline(y=0.15)
-    scatter_fig.update_xaxes(range=[0, 10])
-    scatter_fig.update_yaxes(range=[0, 0.5])
+    scatter_fig.update_traces(
+        hovertemplate=(
+            "<b>%{hovertext}</b><br>"
+            "Project: %{customdata[0]}<br>"
+            "Financing track: %{fullData.name}<br>"
+            "Commercial viability ratio: %{customdata[1]:.2f}<br>"
+            "Binding credit-constraint score: %{customdata[2]:.3f}<br>"
+            "Social BCR: %{customdata[3]:.2f}<br>"
+            "CAPEX: %{customdata[4]:,.0f} MEUR"
+            "<extra></extra>"
+        )
+    )
+    scatter_fig.update_xaxes(
+        range=[0, 10],
+        title_text="Commercial viability ratio<br><sup>Congestion rent / annualized CAPEX</sup>",
+    )
+    scatter_fig.update_yaxes(
+        range=[0, 1.0],
+        title_text="Binding credit-constraint score<br><sup>Project CAPEX share / TSO RAB</sup>",
+    )
     scatter_fig.write_html(scatter_html)
 
     stack_fig = px.bar(
         stack_df,
-        x="financing_track",
+        x="financing_track_label",
         y="value_beur",
         color="financing_component",
         barmode="stack",
+        custom_data=["financing_track_display"],
         title="Aggregate financing stack",
-        category_orders={"financing_track": [TRACK_1, TRACK_2, TRACK_3]},
+        labels={
+            "financing_track_label": "Financing track",
+            "value_beur": "Amount (bn EUR)",
+            "financing_component": "Funding source",
+        },
+        category_orders={"financing_track_label": [TRACK_AXIS_LABELS[track] for track in TRACK_LABELS]},
     )
+    stack_fig.update_traces(
+        hovertemplate=(
+            "<b>%{customdata[0]}</b><br>"
+            "Funding source: %{fullData.name}<br>"
+            "Amount: %{y:.2f} bn EUR"
+            "<extra></extra>"
+        )
+    )
+    stack_fig.update_layout(legend_title_text="Funding source")
+    stack_fig.update_xaxes(title_text="Financing track")
+    stack_fig.update_yaxes(title_text="Amount (bn EUR)")
     stack_fig.write_html(stack_html)
 
     return {
