@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import calendar
 import logging
 import re
 import unicodedata
@@ -539,6 +540,54 @@ def _latest_full_year(series: pd.Series) -> int | None:
     return eligible[-1] if eligible else None
 
 
+def _full_year_hour_count(data_year: int) -> int:
+    return 8784 if calendar.isleap(data_year) else 8760
+
+
+def _build_pair_metrics_for_year(price_df: pd.DataFrame, country_a: str, country_b: str, data_year: int) -> dict[str, Any]:
+    iso3_a = COUNTRY_CODE_TO_ISO3.get(country_a)
+    iso3_b = COUNTRY_CODE_TO_ISO3.get(country_b)
+    if not iso3_a or not iso3_b:
+        return {"notes": f"Missing ISO3 mapping for {country_a}/{country_b}"}
+
+    pair = price_df[price_df["iso3_code"].isin({iso3_a, iso3_b})].copy()
+    if pair.empty:
+        return {"notes": f"No local hourly prices found for {country_a}/{country_b}"}
+
+    pair = pair[pair["data_year"] == data_year]
+    left = pair[pair["iso3_code"] == iso3_a][["datetime_utc", "price_eur_per_mwh"]].rename(columns={"price_eur_per_mwh": "price_a"})
+    right = pair[pair["iso3_code"] == iso3_b][["datetime_utc", "price_eur_per_mwh"]].rename(columns={"price_eur_per_mwh": "price_b"})
+    merged = left.merge(right, on="datetime_utc", how="inner").dropna()
+    expected_hours = _full_year_hour_count(data_year)
+    if len(merged) < expected_hours:
+        return {
+            "notes": (
+                f"No full-year overlapping hourly prices for {country_a}/{country_b} in {data_year} "
+                f"({len(merged)}/{expected_hours} hours)"
+            )
+        }
+
+    abs_diff = (merged["price_a"] - merged["price_b"]).abs()
+
+    return {
+        "avg_price_diff_eur_per_mwh": abs_diff.mean(),
+        "hourly_abs_price_diff_sum_eur_per_mwh": abs_diff.sum(),
+        "hourly_observation_count": int(len(merged)),
+        "price_volatility_a_eur_per_mwh": merged["price_a"].std(),
+        "price_volatility_b_eur_per_mwh": merged["price_b"].std(),
+        "price_correlation": merged["price_a"].corr(merged["price_b"]),
+        "directional_flow_a_to_b_share": (merged["price_a"] > merged["price_b"]).mean(),
+        "data_year": int(data_year),
+        "source_name": "local_hourly_country_proxy",
+        "source_type": "local",
+        "source_url": str(resolve_source("local_hourly_prices").path),
+        "notes": (
+            "Development-mode country-level proxy prices from the local hourly dataset "
+            "`data/european_wholesale_electricity_price_data_hourly/all_countries.csv`."
+        ),
+    }
+
+
 def _build_pair_metrics(price_df: pd.DataFrame, country_a: str, country_b: str) -> dict[str, Any]:
     iso3_a = COUNTRY_CODE_TO_ISO3.get(country_a)
     iso3_b = COUNTRY_CODE_TO_ISO3.get(country_b)
@@ -549,36 +598,22 @@ def _build_pair_metrics(price_df: pd.DataFrame, country_a: str, country_b: str) 
     if pair.empty:
         return {"notes": f"No local hourly prices found for {country_a}/{country_b}"}
 
-    candidate_years = sorted(year for year, count in pair.groupby("data_year").size().items() if count >= 16_000)
-    data_year = candidate_years[-1] if candidate_years else _latest_full_year(pair["data_year"])
-    if data_year is None:
-        return {"notes": f"No full-year local hourly prices found for {country_a}/{country_b}"}
-
-    pair = pair[pair["data_year"] == data_year]
-    left = pair[pair["iso3_code"] == iso3_a][["datetime_utc", "price_eur_per_mwh"]].rename(columns={"price_eur_per_mwh": "price_a"})
-    right = pair[pair["iso3_code"] == iso3_b][["datetime_utc", "price_eur_per_mwh"]].rename(columns={"price_eur_per_mwh": "price_b"})
-    merged = left.merge(right, on="datetime_utc", how="inner").dropna()
-    if len(merged) < 8_000:
-        return {"notes": f"Insufficient overlapping hourly prices for {country_a}/{country_b} in {data_year}"}
-
-    return {
-        "avg_price_diff_eur_per_mwh": (merged["price_a"] - merged["price_b"]).abs().mean(),
-        "price_volatility_a_eur_per_mwh": merged["price_a"].std(),
-        "price_volatility_b_eur_per_mwh": merged["price_b"].std(),
-        "price_correlation": merged["price_a"].corr(merged["price_b"]),
-        "directional_flow_a_to_b_share": (merged["price_a"] > merged["price_b"]).mean(),
-        "data_year": int(data_year),
-        "source_name": "local_hourly_country_proxy",
-        "source_type": "local",
-        "source_url": str(resolve_source("local_hourly_prices").path),
-        "notes": "Development-mode country-level proxy prices from local hourly dataset.",
-    }
+    candidate_years = sorted(int(year) for year in pair["data_year"].dropna().unique())
+    for data_year in reversed(candidate_years):
+        metrics = _build_pair_metrics_for_year(price_df, country_a, country_b, data_year)
+        if pd.notna(metrics.get("avg_price_diff_eur_per_mwh")):
+            return metrics
+    fallback_year = _latest_full_year(pair["data_year"])
+    if fallback_year is not None:
+        return _build_pair_metrics_for_year(price_df, country_a, country_b, fallback_year)
+    return {"notes": f"No full-year local hourly prices found for {country_a}/{country_b}"}
 
 
 def build_price_metrics(
     project_df: pd.DataFrame,
     *,
     development_mode: bool = True,
+    price_years: Iterable[int] | None = None,
 ) -> pd.DataFrame:
     manual_price_df = load_manual_csv("dayahead_price_inputs")
     border_map_df = load_manual_csv("border_zone_map")
@@ -589,6 +624,7 @@ def build_price_metrics(
         raise FileNotFoundError(SOURCE_REGISTRY["dayahead_price_inputs"].missing_message)
 
     price_df = load_local_hourly_price_data()
+    requested_years = tuple(sorted({int(year) for year in price_years})) if price_years is not None else None
     rows = []
     border_map_lookup = {}
     if not border_map_df.empty:
@@ -600,26 +636,52 @@ def build_price_metrics(
         mapped = border_map_lookup.get(row["project_id"], {})
         country_a = mapped.get("country_a") or row.get("country_a")
         country_b = mapped.get("country_b") or row.get("country_b")
-        metrics: dict[str, Any]
+        metrics_rows: list[dict[str, Any]]
         if pd.isna(country_a) or pd.isna(country_b) or not str(country_a).strip() or not str(country_b).strip():
-            metrics = {"notes": "Missing border mapping for price metrics."}
+            if requested_years is None:
+                metrics_rows = [{"notes": "Missing border mapping for price metrics."}]
+            else:
+                metrics_rows = [
+                    {
+                        "data_year": data_year,
+                        "price_scenario": f"proxy_{data_year}",
+                        "notes": "Missing border mapping for price metrics.",
+                    }
+                    for data_year in requested_years
+                ]
         else:
-            metrics = _build_pair_metrics(price_df, str(country_a), str(country_b))
-        rows.append(
-            {
-                "project_id": row["project_id"],
-                "price_scenario": mapped.get("price_scenario", "historical_proxy"),
-                "zone_a": mapped.get("zone_a"),
-                "zone_b": mapped.get("zone_b"),
-                "country_a": country_a,
-                "country_b": country_b,
-                **metrics,
-            }
-        )
+            if requested_years is None:
+                metrics = _build_pair_metrics(price_df, str(country_a), str(country_b))
+                scenario_name = (
+                    f"proxy_{int(metrics['data_year'])}" if pd.notna(metrics.get("data_year")) else "historical_proxy"
+                )
+                metrics_rows = [{**metrics, "price_scenario": scenario_name}]
+            else:
+                metrics_rows = []
+                for data_year in requested_years:
+                    metrics = _build_pair_metrics_for_year(price_df, str(country_a), str(country_b), data_year)
+                    metrics_rows.append(
+                        {
+                            **metrics,
+                            "data_year": data_year,
+                            "price_scenario": f"proxy_{data_year}",
+                        }
+                    )
+        for metrics in metrics_rows:
+            rows.append(
+                {
+                    "project_id": row["project_id"],
+                    "zone_a": mapped.get("zone_a"),
+                    "zone_b": mapped.get("zone_b"),
+                    "country_a": country_a,
+                    "country_b": country_b,
+                    **metrics,
+                }
+            )
     return pd.DataFrame(rows)
 
 
-def build_project_master_table(*, development_mode: bool = True) -> pd.DataFrame:
+def build_project_master_table(*, development_mode: bool = True, price_years: Iterable[int] | None = None) -> pd.DataFrame:
     projects = load_transmission_projects()
     investments = load_transmission_investments()
     cba_2024 = load_tyndp_2024_cba()
@@ -635,15 +697,17 @@ def build_project_master_table(*, development_mode: bool = True) -> pd.DataFrame
     master = _apply_project_overrides(master, overrides)
     master = _apply_participant_data(master, participants)
     master = _attach_credit_reference(master, participants, credit_reference)
-    price_metrics = build_price_metrics(master, development_mode=development_mode)
+    price_metrics = build_price_metrics(master, development_mode=development_mode, price_years=price_years)
     master = master.merge(price_metrics, on="project_id", how="left", suffixes=("", "_price"))
 
     master["data_quality_flags"] = ""
     master["assumptions_note"] = (
         "Capacity uses the larger directional transfer-capacity value when both are present. "
-        "Price metrics default to local country-level proxy prices in development mode."
+        "Price metrics default to the local hourly CSV in development mode."
     )
     master["price_input_mode"] = "development-local-proxy" if development_mode else "manual-or-external"
+    if development_mode and price_years is not None:
+        master["price_input_mode"] = "development-local-proxy-yearly-scenarios"
 
     master = append_flag(
         master,
@@ -658,7 +722,8 @@ def build_project_master_table(*, development_mode: bool = True) -> pd.DataFrame
     master["data_quality_flags"] = master["data_quality_flags"].replace("", pd.NA)
     master["has_data_quality_issue"] = master["data_quality_flags"].notna()
     master["analysis_set"] = "cross-border-transmission"
-    return master.sort_values("project_id").reset_index(drop=True)
+    sort_columns = [column for column in ("project_id", "data_year") if column in master.columns]
+    return master.sort_values(sort_columns).reset_index(drop=True)
 
 
 def pipeline_report(project_df: pd.DataFrame) -> dict[str, Any]:

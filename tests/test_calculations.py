@@ -24,6 +24,11 @@ def test_congestion_rent_formula() -> None:
     assert math.isclose(rent, 52.56, rel_tol=1e-6)
 
 
+def test_congestion_rent_formula_uses_hourly_sum_when_available() -> None:
+    rent = estimated_annual_congestion_rent(999, 1000, 0.60, hourly_abs_price_diff_sum_eur_per_mwh=87_600)
+    assert math.isclose(rent, 52.56, rel_tol=1e-6)
+
+
 def test_social_bcr_ratio() -> None:
     assert social_bcr(200, 100) == 2
 
@@ -41,6 +46,7 @@ def test_calculate_project_metrics_populates_core_columns() -> None:
                 "capex_meur": 2000,
                 "capacity_mw": 1000,
                 "avg_price_diff_eur_per_mwh": 10,
+                "hourly_abs_price_diff_sum_eur_per_mwh": 87_600,
                 "dsew_2030nt_eu27_meur_per_year": 150,
                 "project_capex_share_a_meur": 1000,
                 "project_capex_share_b_meur": 1000,
@@ -59,6 +65,7 @@ def test_calculate_project_metrics_populates_core_columns() -> None:
     row = result.iloc[0]
     assert row["annualized_capex_meur_per_year"] > 0
     assert row["estimated_congestion_rent_meur_per_year"] > 0
+    assert row["congestion_rent_basis"] == "hourly_price_sum"
     assert row["commercial_ratio"] > 0
     assert row["social_bcr"] > 0
     assert math.isclose(row["credit_constraint_score_b"], 0.2, rel_tol=1e-9)

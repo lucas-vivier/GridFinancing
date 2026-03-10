@@ -40,7 +40,10 @@ def estimated_annual_congestion_rent(
     avg_abs_price_diff_eur_per_mwh: float | pd.Series,
     capacity_mw: float | pd.Series,
     utilization_factor: float = DEFAULT_UTILIZATION_FACTOR,
+    hourly_abs_price_diff_sum_eur_per_mwh: float | pd.Series | None = None,
 ) -> float | pd.Series:
+    if hourly_abs_price_diff_sum_eur_per_mwh is not None:
+        return hourly_abs_price_diff_sum_eur_per_mwh * capacity_mw * utilization_factor / 1_000_000
     return avg_abs_price_diff_eur_per_mwh * capacity_mw * utilization_factor * 8760 / 1_000_000
 
 
@@ -98,6 +101,10 @@ def calculate_project_metrics(
         df["avg_price_diff_eur_per_mwh"],
         df["capacity_mw"],
         utilization_factor,
+        hourly_abs_price_diff_sum_eur_per_mwh=df.get("hourly_abs_price_diff_sum_eur_per_mwh"),
+    )
+    df["congestion_rent_basis"] = (
+        "hourly_price_sum" if "hourly_abs_price_diff_sum_eur_per_mwh" in df.columns else "annualized_average_spread"
     )
     df["commercial_ratio"] = safe_ratio(
         df["estimated_congestion_rent_meur_per_year"],
