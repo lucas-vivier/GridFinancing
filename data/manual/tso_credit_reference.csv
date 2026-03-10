@@ -1,0 +1,31 @@
+country_code,tso_name,tso_credit_rating,tso_credit_rating_agency,tso_rab_beur,sovereign_rating,sovereign_rating_agency,debt_to_gdp_pct,deficit_to_gdp_pct,cohesion_country,effective_date,source_url,notes
+FR,RTE (Reseau de Transport d'Electricite),A (negative outlook),S&P,17.0,A+,S&P,113.2,-5.8,No,2025-Q4,https://www.rte-france.com/en/finance/financing-rating,France sovereign downgraded from AA- to A+ by S&P Oct 2025; RTE rating A affirmed Mar 2025
+DE,TenneT TSO GmbH (also 50Hertz/Amprion/TransnetBW),BBB+ (stable),S&P,27.8,AAA,S&P,62.2,-2.7,No,2025-Q4,https://cbonds.com/news/3358467/,Germany has 4 TSOs; TenneT DE RAB shown; 50Hertz (Eurogrid) rated A- by S&P; Amprion rated by Moody's/Fitch
+ES,Red Electrica de Espana (Redeia),A- (stable),S&P,9.3,A+,S&P,101.6,-3.2,No,2025-Q4,https://www.redeia.com/en/shareholders-and-investors/financing/rating,RAB approximate from green eligible assets; net RAB ~9.3bn
+IT,Terna SpA,A- (stable),S&P,22.5,BBB+,S&P,134.9,-3.4,No,2025-Q4,https://www.terna.it/en/investors/debt-rating/rating,S&P upgraded Terna from BBB+ to A- in Apr 2025 following Italy sovereign upgrade
+IE,EirGrid plc,not rated,,3.5,AA,S&P,38.3,4.0,No,2025-Q4,https://www.eirgrid.ie/about-us/eirgrid-group,EirGrid is state-owned; RAB approximate from CRU investment allowance; Ireland ran surplus in 2024
+GR,ADMIE/IPTO (Independent Power Transmission Operator),B1,Moody's,2.0,BBB,S&P,154.2,1.2,Yes,2025-Q4,https://www.admie.gr/en,IPTO rated B1 by Moody's; Greece ran surplus in 2024; cohesion country (listed as EL)
+CY,TSOC (Transmission System Operator Cyprus),not rated,,0.3,A-,S&P,62.8,4.1,Yes,2025-Q4,https://tsoc.org.cy/en,Cyprus ran surplus; very small island system; RAB estimated
+PL,PSE SA (Polskie Sieci Elektroenergetyczne),not rated,,5.0,A-,S&P,55.1,-6.5,Yes,2025-Q4,https://www.pse.pl/home,PSE is 100% state-owned; no public credit rating found; RAB estimated from regulatory filings
+EE,Elering AS,A1 (stable),Moody's,0.5,A+,S&P,23.5,-1.7,Yes,2025-Q4,https://elering.ee/en,Elering rated by Moody's; RAB estimated
+FI,Fingrid Oyj,A+ (stable),S&P,3.5,AA+,S&P,82.5,-4.4,No,2025-Q4,https://www.fingrid.fi/en/pages/investors/credit-ratings/,Fitch also rates Fingrid at A (downgraded from A+ in Nov 2025)
+AT,APG (Austrian Power Grid AG),not rated,,3.0,AA+,S&P,79.9,-4.7,No,2025-Q4,https://www.apg.at/en/about-us/apg/our-company/,APG is 100% subsidiary of Verbund (51% state-owned); no public rating; RAB estimated
+BE,Elia Transmission Belgium SA/NV,BBB+ (stable),S&P,18.5,AA,S&P,103.9,-4.4,No,2025-Q4,https://www.elia.be/en/newsroom,Elia Group also owns 50Hertz in Germany; Elia Belgium RAB reached 18.5bn in 2024
+BG,ESO EAD (Electroenergien Sistemen Operator),not rated,,1.0,BBB+,S&P,23.8,-3.0,Yes,2025-Q4,https://www.eso.bg/?en=,State-owned; no public credit rating; RAB estimated
+HR,HOPS d.o.o. (Hrvatski operator prijenosnog sustava),not rated,,1.0,A-,S&P,57.4,-1.9,Yes,2025-Q4,https://www.hops.hr/en,State-owned; no public credit rating; RAB estimated
+CZ,CEPS a.s.,not rated,,2.5,AA-,S&P,43.3,-2.0,Yes,2025-Q4,https://www.ceps.cz/en,State-owned; no public credit rating; RAB estimated
+DK,Energinet,AA- (stable),S&P,5.0,AAA,S&P,30.5,4.5,No,2025-Q4,https://en.energinet.dk/About-us/Governance/Finances/,Rating confirmed by S&P; Denmark ran surplus; Energinet is SOE
+HU,MAVIR ZRt,not rated,,1.5,BBB-,S&P,73.5,-5.0,Yes,2025-Q4,https://www.mavir.hu/web/mavir-en,State-owned; no public credit rating; RAB estimated
+LV,AST (AS Augstsprieguma tikls),A- (stable),S&P,0.8,A,S&P,46.6,-1.8,Yes,2025-Q4,https://www.ast.lv/en/content/rating,AST rated A- by S&P
+LT,Litgrid AB (via EPSO-G),Baa1 (stable),Moody's,0.8,A,S&P,38.0,-1.3,Yes,2025-Q4,https://www.epsog.lt/en,Litgrid parent EPSO-G rated Baa1 by Moody's; RAB estimated
+LU,Creos Luxembourg SA,not rated,,0.3,AAA,S&P,26.3,0.9,No,2025-Q4,,Creos is DSO/TSO combined; very small system; Luxembourg ran surplus; RAB estimated
+MT,Enemalta plc,not rated,,0.2,A-,S&P,46.2,-3.5,Yes,2025-Q4,,Malta has no separate TSO; Enemalta operates as combined DSO; RAB estimated
+NL,TenneT TSO BV (Netherlands),A- (stable),S&P,8.0,AAA,S&P,43.7,-0.9,No,2025-Q4,https://www.tennet.eu/nl-en/about-tennet/investor-relations/credit-rating-tennet-netherlands-bv,TenneT Holding rated BBB+ by S&P; TenneT NL subsidiary rated separately
+PT,REN (Rede Electrica Nacional),BBB (stable),S&P,3.5,A+,S&P,93.6,0.5,Yes,2025-Q4,,REN rating approximate; Portugal ran surplus; sovereign upgraded to A+ Aug 2025
+RO,Transelectrica SA,Baa3 (negative),Moody's,1.5,BBB-,S&P,54.8,-9.3,Yes,2025-Q4,,Transelectrica outlook revised to negative following Romania sovereign outlook change; Romania has largest deficit in EU
+SK,SEPS a.s. (Slovenska elektrizacna prenosova sustava),not rated,,1.5,A+,S&P,59.7,-5.5,Yes,2025-Q4,,State-owned; no public credit rating; RAB estimated
+SI,ELES d.o.o.,not rated,,1.0,AA,S&P,66.6,-0.9,Yes,2025-Q4,https://www.eles.si/en,State-owned; no public credit rating; RAB estimated
+SE,Svenska Kraftnat,not rated,,4.0,AAA,S&P,34.0,-1.6,No,2025-Q4,https://www.svk.se/en/,State agency (not a corporation); no public credit rating; RAB estimated
+UK,National Grid Electricity Transmission plc,BBB+ (stable),S&P,55.0,AA,S&P,98.0,-5.2,No,2025-Q4,https://www.nationalgrid.com/investors/debt-investors/credit-ratings,NGET is the main England/Wales TSO; RAB ~GBP 45bn (~EUR 55bn); deficit is FY2024/25
+NO,Statnett SF,A+ (stable),S&P,8.0,AAA,S&P,42.7,13.2,No,2025-Q4,https://www.statnett.no/en/about-statnett/,Statnett SACP is bbb; rating uplifted due to govt support; surplus due to oil/gas revenues; RAB ~NOK 83bn (~EUR 7-8bn)
+CH,Swissgrid AG,not rated,,3.0,AAA,S&P,37.5,0.5,No,2025-Q4,https://www.swissgrid.ch/en/home.html,Not an EU member; no public credit rating; RAB estimated; Switzerland ran small surplus

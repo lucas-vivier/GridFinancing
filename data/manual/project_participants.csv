@@ -1,0 +1,218 @@
+project_id,country_code,tso_name,capex_share_pct,is_primary_border_side,participant_order,source,notes
+4,ES,Red Electrica (Redeia),50,True,1,TYNDP 2024 Trans.Projects Country field,ES-PT interconnection
+4,PT,REN,50,False,2,TYNDP 2024 Trans.Projects Country field,ES-PT interconnection
+16,ES,Red Electrica (Redeia),50,True,1,TYNDP 2024 Trans.Projects Country field,Biscay Gulf
+16,FR,RTE,50,False,2,TYNDP 2024 Trans.Projects Country field,Biscay Gulf
+28,IT,Terna,50,True,1,TYNDP 2024 Trans.Projects Country field,Italy-Montenegro; ME is non-EU
+28,ME,,50,False,2,TYNDP 2024 Trans.Projects Country field,Montenegro - no EU TSO
+29,IT,Terna,50,True,1,TYNDP 2024 Trans.Projects Country field,Italy-Tunisia; TN is non-EU
+29,TN,,50,False,2,TYNDP 2024 Trans.Projects Country field,Tunisia - no EU TSO
+40,BE,Elia,34,True,1,TYNDP 2024 Trans.Projects Country field,3-country project BE-DE-LU; shares estimated
+40,DE,TenneT/Amprion,33,False,2,TYNDP 2024 Trans.Projects Country field,3-country project BE-DE-LU
+40,LU,Creos,33,False,3,TYNDP 2024 Trans.Projects Country field,3-country project BE-DE-LU
+47,AT,APG,50,True,1,TYNDP 2024 Trans.Projects Country field,Westtirol-Vöhringen
+47,DE,TenneT/Amprion,50,False,2,TYNDP 2024 Trans.Projects Country field,Westtirol-Vöhringen
+81,GB,National Grid ESO,50,True,1,TYNDP 2024 Trans.Projects Country field,North South Interconnector; GB side is Northern Ireland (SONI)
+81,IE,EirGrid,50,False,2,TYNDP 2024 Trans.Projects Country field,North South Interconnector
+94,DE,PSE/TenneT,50,True,1,TYNDP 2024 Trans.Projects Country field,GerPol Improvements; multi-border
+94,PL,PSE,50,False,2,TYNDP 2024 Trans.Projects Country field,GerPol Improvements
+107,FR,RTE,50,True,1,TYNDP 2024 Trans.Projects Country field,Celtic Interconnector
+107,IE,EirGrid,50,False,2,TYNDP 2024 Trans.Projects Country field,Celtic Interconnector
+111,FI,Fingrid,50,True,1,TYNDP 2024 Trans.Projects Country field,Aurora line 3rd AC FI-SE north
+111,SE,Svenska Kraftnat,50,False,2,TYNDP 2024 Trans.Projects Country field,Aurora line
+121,BE,Elia,50,True,1,TYNDP 2024 Trans.Projects Country field,Nautilus BE-UK
+121,GB,National Grid ESO,50,False,2,TYNDP 2024 Trans.Projects Country field,Nautilus BE-UK
+124,LT,Litgrid,34,True,1,TYNDP 2024 Trans.Projects Country field,3-country project LT-LV-SE
+124,LV,AST,33,False,2,TYNDP 2024 Trans.Projects Country field,Ekhyddan-Nybro-Hemsjö
+124,SE,Svenska Kraftnat,33,False,3,TYNDP 2024 Trans.Projects Country field,Ekhyddan-Nybro-Hemsjö
+144,RO,Transelectrica,50,True,1,TYNDP 2024 Trans.Projects Country field,Mid Continental East corridor; multi-border RO-RS and HU-RO
+144,RS,,50,False,2,TYNDP 2024 Trans.Projects Country field,Serbia - non-EU
+150,IT,Terna,50,True,1,TYNDP 2024 Trans.Projects Country field,Italy-Slovenia
+150,SI,ELES,50,False,2,TYNDP 2024 Trans.Projects Country field,Italy-Slovenia
+153,FR,RTE,50,True,1,TYNDP 2024 Trans.Projects Country field,France-Alderney-Britain
+153,GB,National Grid ESO,50,False,2,TYNDP 2024 Trans.Projects Country field,FAB link
+170,EE,Elering,25,True,1,TYNDP 2024 Trans.Projects Country field,4-country Baltic Sync project
+170,LT,Litgrid,25,False,2,TYNDP 2024 Trans.Projects Country field,Baltic States Synchronization
+170,LV,AST,25,False,3,TYNDP 2024 Trans.Projects Country field,Baltic States Synchronization
+170,PL,PSE,25,False,4,TYNDP 2024 Trans.Projects Country field,Baltic States Synchronization; primary border LT-PL
+174,CH,Swissgrid,50,True,1,TYNDP 2024 Trans.Projects Country field,Greenconnector; CH is non-EU
+174,IT,Terna,50,False,2,TYNDP 2024 Trans.Projects Country field,Greenconnector
+176,DE,TenneT,50,True,1,TYNDP 2024 Trans.Projects Country field,Hansa PowerBridge I
+176,SE,Svenska Kraftnat,50,False,2,TYNDP 2024 Trans.Projects Country field,Hansa PowerBridge I
+187,AT,APG,50,True,1,TYNDP 2024 Trans.Projects Country field,St. Peter-Pleinting
+187,DE,TenneT/Amprion,50,False,2,TYNDP 2024 Trans.Projects Country field,St. Peter-Pleinting
+210,AT,APG,50,True,1,TYNDP 2024 Trans.Projects Country field,Würmlach-Somplago
+210,IT,Terna,50,False,2,TYNDP 2024 Trans.Projects Country field,Würmlach-Somplago
+219,CY,TSOC,34,True,1,TYNDP 2024 Trans.Projects Country field,Great Sea Interconnector; 3-country CY-GR-IL
+219,GR,ADMIE/IPTO,33,False,2,TYNDP 2024 Trans.Projects Country field,Great Sea Interconnector
+219,IL,,33,False,3,TYNDP 2024 Trans.Projects Country field,Israel - non-EU
+225,BE,Elia,50,True,1,TYNDP 2024 Trans.Projects Country field,2nd interconnector BE-DE
+225,DE,TenneT/Amprion,50,False,2,TYNDP 2024 Trans.Projects Country field,2nd interconnector BE-DE
+227,BA,,34,True,1,TYNDP 2024 Trans.Projects Country field,Transbalkan Corridor; 3-country BA-ME-RS; all non-EU
+227,ME,,33,False,2,TYNDP 2024 Trans.Projects Country field,Transbalkan Corridor
+227,RS,,33,False,3,TYNDP 2024 Trans.Projects Country field,Transbalkan Corridor
+228,DE,TenneT/Amprion,50,True,1,TYNDP 2024 Trans.Projects Country field,Muhlbach-Eichstetten
+228,FR,RTE,50,False,2,TYNDP 2024 Trans.Projects Country field,Muhlbach-Eichstetten
+231,CH,Swissgrid,50,True,1,TYNDP 2024 Trans.Projects Country field,Beznau-Tiengen; CH non-EU
+231,DE,TenneT/Amprion,50,False,2,TYNDP 2024 Trans.Projects Country field,Beznau-Tiengen
+239,FI,Fingrid,50,True,1,TYNDP 2024 Trans.Projects Country field,Fenno-Skan 3
+239,SE,Svenska Kraftnat,50,False,2,TYNDP 2024 Trans.Projects Country field,Fenno-Skan 3
+243,HR,HOPS,50,True,1,TYNDP 2024 Trans.Projects Country field,New 400kV HR-RS; RS non-EU
+243,RS,,50,False,2,TYNDP 2024 Trans.Projects Country field,Serbia - non-EU
+244,DE,TenneT/Amprion,50,True,1,TYNDP 2024 Trans.Projects Country field,Vigy-Uchtelfangen
+244,FR,RTE,50,False,2,TYNDP 2024 Trans.Projects Country field,Vigy-Uchtelfangen
+247,FR,RTE,50,True,1,TYNDP 2024 Trans.Projects Country field,AQUIND
+247,GB,National Grid ESO,50,False,2,TYNDP 2024 Trans.Projects Country field,AQUIND
+250,CH,Swissgrid,50,True,1,TYNDP 2024 Trans.Projects Country field,Merchant line CH-IT; CH non-EU
+250,IT,Terna,50,False,2,TYNDP 2024 Trans.Projects Country field,Castasegna-Mese
+259,HU,MAVIR,50,True,1,TYNDP 2024 Trans.Projects Country field,HU-RO
+259,RO,Transelectrica,50,False,2,TYNDP 2024 Trans.Projects Country field,HU-RO
+260,GB,National Grid ESO,50,True,1,TYNDP 2024 Trans.Projects Country field,Multi-purpose HVDC GB-NL
+260,NL,TenneT NL,50,False,2,TYNDP 2024 Trans.Projects Country field,Multi-purpose HVDC GB-NL
+267,DE,TenneT,50,True,1,TYNDP 2024 Trans.Projects Country field,Hansa PowerBridge II
+267,SE,Svenska Kraftnat,50,False,2,TYNDP 2024 Trans.Projects Country field,Hansa PowerBridge II
+270,ES,Red Electrica (Redeia),50,True,1,TYNDP 2024 Trans.Projects Country field,FR-ES Aragón-Atlantic Pyrenees
+270,FR,RTE,50,False,2,TYNDP 2024 Trans.Projects Country field,FR-ES Aragón-Atlantic Pyrenees
+276,ES,Red Electrica (Redeia),50,True,1,TYNDP 2024 Trans.Projects Country field,FR-ES Navarra-Landes
+276,FR,RTE,50,False,2,TYNDP 2024 Trans.Projects Country field,FR-ES Navarra-Landes
+280,BE,Elia,50,True,1,TYNDP 2024 Trans.Projects Country field,FR-BE Lonny-Achene-Gramme
+280,FR,RTE,50,False,2,TYNDP 2024 Trans.Projects Country field,FR-BE Lonny-Achene-Gramme
+283,IT,Terna,50,True,1,TYNDP 2024 Trans.Projects Country field,TuNur Italy; TN non-EU
+283,TN,,50,False,2,TYNDP 2024 Trans.Projects Country field,Tunisia - non-EU
+285,FR,RTE,50,True,1,TYNDP 2024 Trans.Projects Country field,GridLink FR-GB
+285,GB,National Grid ESO,50,False,2,TYNDP 2024 Trans.Projects Country field,GridLink
+299,FR,RTE,34,True,1,TYNDP 2024 Trans.Projects Country field,SACOI 3; multi-border FR-IT via Corsica/Sardinia
+299,IT,Terna,66,False,2,TYNDP 2024 Trans.Projects Country field,SACOI 3; IT has majority via internal Sardinia-Corsica links
+309,DE,TenneT,50,True,1,TYNDP 2024 Trans.Projects Country field,NeuConnect DE-GB
+309,GB,National Grid ESO,50,False,2,TYNDP 2024 Trans.Projects Country field,NeuConnect
+313,AT,APG,50,True,1,TYNDP 2024 Trans.Projects Country field,Isar/Altheim/Ottenhofen-St.Peter
+313,DE,TenneT/Amprion,50,False,2,TYNDP 2024 Trans.Projects Country field,Isar/Altheim/Ottenhofen-St.Peter
+323,IT,Terna,50,True,1,TYNDP 2024 Trans.Projects Country field,Dekani-Zaule IT-SI
+323,SI,ELES,50,False,2,TYNDP 2024 Trans.Projects Country field,Dekani-Zaule
+324,IT,Terna,50,True,1,TYNDP 2024 Trans.Projects Country field,Redipuglia-Vrtojba IT-SI
+324,SI,ELES,50,False,2,TYNDP 2024 Trans.Projects Country field,Redipuglia-Vrtojba
+325,AT,APG,50,True,1,TYNDP 2024 Trans.Projects Country field,Obersielach-Podlog AT-SI
+325,SI,ELES,50,False,2,TYNDP 2024 Trans.Projects Country field,Obersielach-Podlog
+328,DE,TenneT/Amprion,50,True,1,TYNDP 2024 Trans.Projects Country field,DE-LUX interconnector
+328,LU,Creos,50,False,2,TYNDP 2024 Trans.Projects Country field,DE-LUX
+330,CZ,CEPS,50,True,1,TYNDP 2024 Trans.Projects Country field,4th 400kV CZ-SK
+330,SK,SEPS,50,False,2,TYNDP 2024 Trans.Projects Country field,4th 400kV CZ-SK
+335,DE,TenneT,34,True,1,TYNDP 2024 Trans.Projects Country field,NSWPH; 3-country DE-DK-NL; blank transfer capacity
+335,DK,Energinet,33,False,2,TYNDP 2024 Trans.Projects Country field,NSWPH
+335,NL,TenneT NL,33,False,3,TYNDP 2024 Trans.Projects Country field,NSWPH
+341,RO,Transelectrica,50,True,1,TYNDP 2024 Trans.Projects Country field,North CSE Corridor; RS non-EU
+341,RS,,50,False,2,TYNDP 2024 Trans.Projects Country field,Serbia - non-EU
+342,BG,ESO,50,True,1,TYNDP 2024 Trans.Projects Country field,Central Balkan Corridor; RS non-EU
+342,RS,,50,False,2,TYNDP 2024 Trans.Projects Country field,Serbia - non-EU
+343,BA,,50,True,1,TYNDP 2024 Trans.Projects Country field,CSE1 New; BA non-EU
+343,HR,HOPS,50,False,2,TYNDP 2024 Trans.Projects Country field,CSE1 New
+349,GB,National Grid ESO,50,True,1,TYNDP 2024 Trans.Projects Country field,MaresConnect GB-IE
+349,IE,EirGrid,50,False,2,TYNDP 2024 Trans.Projects Country field,MaresConnect
+350,AL,,50,True,1,TYNDP 2024 Trans.Projects Country field,South Balkan Corridor; AL and MK non-EU
+350,MK,,50,False,2,TYNDP 2024 Trans.Projects Country field,North Macedonia - non-EU
+375,AT,APG,50,True,1,TYNDP 2024 Trans.Projects Country field,Lienz-Veneto AT-IT
+375,IT,Terna,50,False,2,TYNDP 2024 Trans.Projects Country field,Lienz-Veneto
+376,GR,ADMIE/IPTO,50,True,1,TYNDP 2024 Trans.Projects Country field,Meliti-Bitola GR-MK; MK non-EU
+376,MK,,50,False,2,TYNDP 2024 Trans.Projects Country field,North Macedonia - non-EU
+377,BE,Elia,50,True,1,TYNDP 2024 Trans.Projects Country field,VanEyck-Maasbracht BE-NL
+377,NL,TenneT NL,50,False,2,TYNDP 2024 Trans.Projects Country field,VanEyck-Maasbracht
+1041,EG,,50,True,1,TYNDP 2024 Trans.Projects Country field,GREGY; EG non-EU
+1041,GR,ADMIE/IPTO,50,False,2,TYNDP 2024 Trans.Projects Country field,GREGY
+1048,EG,,50,True,1,TYNDP 2024 Trans.Projects Country field,GAP Interconnector; EG non-EU
+1048,GR,ADMIE/IPTO,50,False,2,TYNDP 2024 Trans.Projects Country field,GAP Interconnector
+1049,BE,Elia,50,True,1,TYNDP 2024 Trans.Projects Country field,Cronos Energy BE-GB
+1049,GB,National Grid ESO,50,False,2,TYNDP 2024 Trans.Projects Country field,Cronos Energy
+1050,DE,TenneT,50,True,1,TYNDP 2024 Trans.Projects Country field,Tarchon Energy DE-GB
+1050,GB,National Grid ESO,50,False,2,TYNDP 2024 Trans.Projects Country field,Tarchon Energy
+1058,CH,Swissgrid,50,True,1,TYNDP 2024 Trans.Projects Country field,HVDC DE-CH; CH non-EU
+1058,DE,TenneT/Amprion,50,False,2,TYNDP 2024 Trans.Projects Country field,HVDC DE-CH
+1066,BG,ESO,50,True,1,TYNDP 2024 Trans.Projects Country field,BG-TR; TR non-EU
+1066,TR,,50,False,2,TYNDP 2024 Trans.Projects Country field,Turkey - non-EU
+1067,GR,ADMIE/IPTO,50,True,1,TYNDP 2024 Trans.Projects Country field,GR-TR; TR non-EU
+1067,TR,,50,False,2,TYNDP 2024 Trans.Projects Country field,Turkey - non-EU
+1068,LV,AST,50,True,1,TYNDP 2024 Trans.Projects Country field,LaSGo Link LV-SE
+1068,SE,Svenska Kraftnat,50,False,2,TYNDP 2024 Trans.Projects Country field,LaSGo Link
+1074,HU,MAVIR,50,True,1,TYNDP 2024 Trans.Projects Country field,Pannonian Corridor; RS non-EU
+1074,RS,,50,False,2,TYNDP 2024 Trans.Projects Country field,Serbia - non-EU
+1085,IT,Terna,50,True,1,TYNDP 2024 Trans.Projects Country field,Malta-Italy Cable Link No.2
+1085,MT,Enemalta,50,False,2,TYNDP 2024 Trans.Projects Country field,Malta-Italy Cable
+1088,EE,Elering,50,True,1,TYNDP 2024 Trans.Projects Country field,LV-EE Hybrid Offshore
+1088,LV,AST,50,False,2,TYNDP 2024 Trans.Projects Country field,LV-EE Hybrid Offshore
+1092,BE,Elia,50,True,1,TYNDP 2024 Trans.Projects Country field,TritonLink BE-DK offshore hybrid
+1092,DK,Energinet,50,False,2,TYNDP 2024 Trans.Projects Country field,TritonLink
+1094,EE,Elering,50,True,1,TYNDP 2024 Trans.Projects Country field,Estlink 3
+1094,FI,Fingrid,50,False,2,TYNDP 2024 Trans.Projects Country field,Estlink 3
+1095,FI,Fingrid,50,True,1,TYNDP 2024 Trans.Projects Country field,Aurora line 2 (4th AC FI-SE north)
+1095,SE,Svenska Kraftnat,50,False,2,TYNDP 2024 Trans.Projects Country field,Aurora line 2
+1097,DK,Energinet,50,True,1,TYNDP 2024 Trans.Projects Country field,Upgrade to Konti-Skan DK-SE
+1097,SE,Svenska Kraftnat,50,False,2,TYNDP 2024 Trans.Projects Country field,Konti-Skan
+1100,CZ,CEPS,50,True,1,TYNDP 2024 Trans.Projects Country field,CZ-DE Hradec-Röhrsdorf reinforcement
+1100,DE,TenneT/50Hertz,50,False,2,TYNDP 2024 Trans.Projects Country field,CZ-DE reinforcement
+1104,DE,TenneT/Amprion,50,True,1,TYNDP 2024 Trans.Projects Country field,Bauler-Roost DE-LU
+1104,LU,Creos,50,False,2,TYNDP 2024 Trans.Projects Country field,Bauler-Roost
+1105,GE,,50,True,1,TYNDP 2024 Trans.Projects Country field,Georgia-Romania Black Sea; GE non-EU
+1105,RO,Transelectrica,50,False,2,TYNDP 2024 Trans.Projects Country field,Georgia-Romania
+1106,DE,TenneT,50,True,1,TYNDP 2024 Trans.Projects Country field,Bornholm Energy Island DE-DK
+1106,DK,Energinet,50,False,2,TYNDP 2024 Trans.Projects Country field,Bornholm Energy Island
+1112,GR,ADMIE/IPTO,50,True,1,TYNDP 2024 Trans.Projects Country field,GRITA 2 GR-IT
+1112,IT,Terna,50,False,2,TYNDP 2024 Trans.Projects Country field,GRITA 2
+1138,MD,,50,True,1,TYNDP 2024 Trans.Projects Country field,Suceava-Balti; MD non-EU
+1138,RO,Transelectrica,50,False,2,TYNDP 2024 Trans.Projects Country field,Suceava-Balti
+1171,CH,Swissgrid,50,True,1,TYNDP 2024 Trans.Projects Country field,IT-CH interconnection; CH non-EU
+1171,IT,Terna,50,False,2,TYNDP 2024 Trans.Projects Country field,IT-CH interconnection
+1183,AL,,50,True,1,TYNDP 2024 Trans.Projects Country field,GR-AL; AL non-EU
+1183,GR,ADMIE/IPTO,50,False,2,TYNDP 2024 Trans.Projects Country field,GR-AL
+1192,DE,TenneT,50,True,1,TYNDP 2024 Trans.Projects Country field,HansaLink Phase 1 DE-GB; blank transfer capacity
+1192,GB,National Grid ESO,50,False,2,TYNDP 2024 Trans.Projects Country field,HansaLink Phase 1
+1193,DE,TenneT,50,True,1,TYNDP 2024 Trans.Projects Country field,HansaLink Phase 2 DE-GB; blank transfer capacity
+1193,GB,National Grid ESO,50,False,2,TYNDP 2024 Trans.Projects Country field,HansaLink Phase 2
+1197,GB,National Grid ESO,50,True,1,TYNDP 2024 Trans.Projects Country field,NU-Link GB-NL
+1197,NL,TenneT NL,50,False,2,TYNDP 2024 Trans.Projects Country field,NU-Link
+1200,BE,Elia,25,True,1,TYNDP 2024 Trans.Projects Country field,4-country hybrid NO-DE/DK/BE; shares estimated
+1200,DE,TenneT,25,False,2,TYNDP 2024 Trans.Projects Country field,Hybrid interconnector NO-continent
+1200,DK,Energinet,25,False,3,TYNDP 2024 Trans.Projects Country field,Hybrid interconnector NO-continent
+1200,NO,Statnett,25,False,4,TYNDP 2024 Trans.Projects Country field,Hybrid interconnector NO-continent; primary border DE-NO
+1201,DK,Energinet,50,True,1,TYNDP 2024 Trans.Projects Country field,Reinvestment Skagerrak 1+2 DK-NO
+1201,NO,Statnett,50,False,2,TYNDP 2024 Trans.Projects Country field,Skagerrak reinvestment
+1202,FI,Fingrid,50,True,1,TYNDP 2024 Trans.Projects Country field,Increased capacity NO-FI back-to-back
+1202,NO,Statnett,50,False,2,TYNDP 2024 Trans.Projects Country field,NO-FI back-to-back
+1207,DE,TenneT/Amprion,50,True,1,TYNDP 2024 Trans.Projects Country field,380kV Niederstedem-Bertrange DE-LU
+1207,LU,Creos,50,False,2,TYNDP 2024 Trans.Projects Country field,Niederstedem-Bertrange
+1208,DZ,,34,True,1,TYNDP 2024 Trans.Projects Country field,Medlink 3-country DZ-IT-TN; all non-EU except IT
+1208,IT,Terna,33,False,2,TYNDP 2024 Trans.Projects Country field,Medlink
+1208,TN,,33,False,3,TYNDP 2024 Trans.Projects Country field,Medlink; Tunisia non-EU
+1209,LT,Litgrid,50,True,1,TYNDP 2024 Trans.Projects Country field,LT-LV cross-border strengthening
+1209,LV,AST,50,False,2,TYNDP 2024 Trans.Projects Country field,LT-LV strengthening
+1210,ES,Red Electrica (Redeia),50,True,1,TYNDP 2024 Trans.Projects Country field,APOLLO-LINK ES-IT
+1210,IT,Terna,50,False,2,TYNDP 2024 Trans.Projects Country field,APOLLO-LINK
+1211,DE,TenneT,34,True,1,TYNDP 2024 Trans.Projects Country field,Baltic WindConnector 3-country DE-EE-LV
+1211,EE,Elering,33,False,2,TYNDP 2024 Trans.Projects Country field,Baltic WindConnector
+1211,LV,AST,33,False,3,TYNDP 2024 Trans.Projects Country field,Baltic WindConnector
+1213,DE,TenneT,50,True,1,TYNDP 2024 Trans.Projects Country field,Offshore hybrid DE-NL
+1213,NL,TenneT NL,50,False,2,TYNDP 2024 Trans.Projects Country field,Offshore hybrid DE-NL
+1214,DE,TenneT,50,True,1,TYNDP 2024 Trans.Projects Country field,Hybrid DK-DE; blank transfer capacity
+1214,DK,Energinet,50,False,2,TYNDP 2024 Trans.Projects Country field,Hybrid DK-DE
+1215,DE,TenneT,50,True,1,TYNDP 2024 Trans.Projects Country field,Xlinks Morocco-Germany; MA non-EU
+1215,MA,,50,False,2,TYNDP 2024 Trans.Projects Country field,Morocco - non-EU
+1216,HU,MAVIR,50,True,1,TYNDP 2024 Trans.Projects Country field,HVDC RO-HU
+1216,RO,Transelectrica,50,False,2,TYNDP 2024 Trans.Projects Country field,HVDC RO-HU
+1218,BE,Elia,50,True,1,TYNDP 2024 Trans.Projects Country field,Hybrid HVDC BE-NL
+1218,NL,TenneT NL,50,False,2,TYNDP 2024 Trans.Projects Country field,Hybrid HVDC BE-NL
+1226,BG,ESO,13,True,1,TYNDP 2024 Trans.Projects Country field,8-country N-S corridor; shares estimated equally
+1226,CZ,CEPS,13,False,2,TYNDP 2024 Trans.Projects Country field,N-S Eastern Europe corridor
+1226,GR,ADMIE/IPTO,13,False,3,TYNDP 2024 Trans.Projects Country field,N-S Eastern Europe corridor
+1226,HU,MAVIR,13,False,4,TYNDP 2024 Trans.Projects Country field,N-S Eastern Europe corridor
+1226,MK,,13,False,5,TYNDP 2024 Trans.Projects Country field,N-S Eastern Europe corridor; MK non-EU
+1226,PL,PSE,13,False,6,TYNDP 2024 Trans.Projects Country field,N-S Eastern Europe corridor
+1226,RO,Transelectrica,13,False,7,TYNDP 2024 Trans.Projects Country field,N-S Eastern Europe corridor
+1226,SK,SEPS,13,False,8,TYNDP 2024 Trans.Projects Country field,N-S Eastern Europe corridor
+1230,MT,Enemalta,50,True,1,TYNDP 2024 Trans.Projects Country field,TuNur Malta; TN non-EU
+1230,TN,,50,False,2,TYNDP 2024 Trans.Projects Country field,Tunisia - non-EU
+1231,DE,TenneT,50,True,1,TYNDP 2024 Trans.Projects Country field,Green Aegean DE-GR
+1231,GR,ADMIE/IPTO,50,False,2,TYNDP 2024 Trans.Projects Country field,Green Aegean
+1235,HU,MAVIR,50,True,1,TYNDP 2024 Trans.Projects Country field,2nd circuit 400kV HU-SK
+1235,SK,SEPS,50,False,2,TYNDP 2024 Trans.Projects Country field,Sajóivánka-Rimavská Sobota
+1239,SK,SEPS,50,True,1,TYNDP 2024 Trans.Projects Country field,UA-SK interconnection; blank transfer capacity; UA non-EU
+1239,UA,,50,False,2,TYNDP 2024 Trans.Projects Country field,Ukraine - non-EU
+1240,RO,Transelectrica,50,True,1,TYNDP 2024 Trans.Projects Country field,UA-RO interconnection; blank transfer capacity; UA non-EU
+1240,UA,,50,False,2,TYNDP 2024 Trans.Projects Country field,Ukraine - non-EU

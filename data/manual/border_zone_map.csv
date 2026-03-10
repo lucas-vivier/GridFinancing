@@ -1,0 +1,101 @@
+project_id,price_scenario,zone_a,zone_b,country_a,country_b,mapping_method,source,notes
+4,proxy_2023,ES00,PT00,ES,PT,TYNDP border code,TYNDP 2024 Trans.Projects Border field,
+16,proxy_2023,ES00,FR00,ES,FR,TYNDP border code,TYNDP 2024 Trans.Projects Border field,
+28,proxy_2023,ITCS,ME00,IT,ME,TYNDP border code,TYNDP 2024 Trans.Projects Border field,ME non-EU; use IT south zone
+29,proxy_2023,ITSI,TN00,IT,TN,TYNDP border code,TYNDP 2024 Trans.Projects Border field,TN non-EU
+40,proxy_2023,BE00,LUG1,BE,LU,TYNDP border code,TYNDP 2024 Trans.Projects Border field,3-country project; primary border BE-LU
+47,proxy_2023,AT00,DE00,AT,DE,TYNDP border code,TYNDP 2024 Trans.Projects Border field,
+81,proxy_2023,IE00,UKNI,IE,GB,TYNDP border code,TYNDP 2024 Trans.Projects Border field,GB side is Northern Ireland
+94,proxy_2023,DE00,PLI0,DE,PL,TYNDP border code,TYNDP 2024 Trans.Projects Border field,Multi-border; primary DE-PL
+107,proxy_2023,FR00,IE00,FR,IE,TYNDP border code,TYNDP 2024 Trans.Projects Border field,
+111,proxy_2023,FI00,SE01,FI,SE,TYNDP border code,TYNDP 2024 Trans.Projects Border field,SE01 = Sweden north
+121,proxy_2023,BE00,UK00,BE,GB,TYNDP border code,TYNDP 2024 Trans.Projects Border field,
+124,proxy_2023,LT00,SE04,LT,SE,TYNDP border code,TYNDP 2024 Trans.Projects Border field,3-country; primary border LT-SE
+144,proxy_2023,RO00,RS00,RO,RS,TYNDP border code,TYNDP 2024 Trans.Projects Border field,Multi-border RO-RS and HU-RO; RS non-EU
+150,proxy_2023,ITN1,SI00,IT,SI,TYNDP border code,TYNDP 2024 Trans.Projects Border field,ITN1 = Italy north
+153,proxy_2023,FR00,UK00,FR,GB,TYNDP border code,TYNDP 2024 Trans.Projects Border field,
+170,proxy_2023,LT00,PL00,LT,PL,TYNDP border code,TYNDP 2024 Trans.Projects Border field,4-country; primary border LT-PL
+174,proxy_2023,CH00,ITN1,CH,IT,TYNDP border code,TYNDP 2024 Trans.Projects Border field,CH non-EU
+176,proxy_2023,DE00,SE04,DE,SE,TYNDP border code,TYNDP 2024 Trans.Projects Border field,SE04 = Sweden south
+187,proxy_2023,AT00,DE00,AT,DE,TYNDP border code,TYNDP 2024 Trans.Projects Border field,
+210,proxy_2023,AT00,ITN1,AT,IT,TYNDP border code,TYNDP 2024 Trans.Projects Border field,
+219,proxy_2023,CY00,GR03,CY,GR,TYNDP border code,TYNDP 2024 Trans.Projects Border field,3-country CY-GR-IL; primary border CY-GR
+225,proxy_2023,BE00,DE00,BE,DE,TYNDP border code,TYNDP 2024 Trans.Projects Border field,
+227,proxy_2023,BA00,RS00,BA,RS,TYNDP border code,TYNDP 2024 Trans.Projects Border field,3-country BA-ME-RS; all non-EU
+228,proxy_2023,DE00,FR00,DE,FR,TYNDP border code,TYNDP 2024 Trans.Projects Border field,
+231,proxy_2023,CH00,DE00,CH,DE,TYNDP border code,TYNDP 2024 Trans.Projects Border field,CH non-EU
+239,proxy_2023,FI00,SE03,FI,SE,TYNDP border code,TYNDP 2024 Trans.Projects Border field,SE03 = Sweden central
+243,proxy_2023,HR00,RS00,HR,RS,TYNDP border code,TYNDP 2024 Trans.Projects Border field,RS non-EU
+244,proxy_2023,DE00,FR00,DE,FR,TYNDP border code,TYNDP 2024 Trans.Projects Border field,
+247,proxy_2023,FR00,UK00,FR,GB,TYNDP border code,TYNDP 2024 Trans.Projects Border field,
+250,proxy_2023,CH00,ITN1,CH,IT,TYNDP border code,TYNDP 2024 Trans.Projects Border field,CH non-EU
+259,proxy_2023,HU00,RO00,HU,RO,TYNDP border code,TYNDP 2024 Trans.Projects Border field,
+260,proxy_2023,UK00,NL00,GB,NL,TYNDP border code,TYNDP 2024 Trans.Projects Border field,
+267,proxy_2023,DE00,SE04,DE,SE,TYNDP border code,TYNDP 2024 Trans.Projects Border field,
+270,proxy_2023,ES00,FR00,ES,FR,TYNDP border code,TYNDP 2024 Trans.Projects Border field,
+276,proxy_2023,ES00,FR00,ES,FR,TYNDP border code,TYNDP 2024 Trans.Projects Border field,
+280,proxy_2023,BE00,FR00,BE,FR,TYNDP border code,TYNDP 2024 Trans.Projects Border field,
+283,proxy_2023,ITCS,TN00,IT,TN,TYNDP border code,TYNDP 2024 Trans.Projects Border field,TN non-EU; isolated mode
+285,proxy_2023,FR00,UK00,FR,GB,TYNDP border code,TYNDP 2024 Trans.Projects Border field,
+299,proxy_2023,FR15,ITCO,FR,IT,TYNDP border code,TYNDP 2024 Trans.Projects Border field,SACOI 3; multi-border via Corsica; FR15=Corsica zone
+309,proxy_2023,DE00,UK00,DE,GB,TYNDP border code,TYNDP 2024 Trans.Projects Border field,
+313,proxy_2023,AT00,DE00,AT,DE,TYNDP border code,TYNDP 2024 Trans.Projects Border field,
+323,proxy_2023,ITN1,SI00,IT,SI,TYNDP border code,TYNDP 2024 Trans.Projects Border field,
+324,proxy_2023,ITN1,SI00,IT,SI,TYNDP border code,TYNDP 2024 Trans.Projects Border field,
+325,proxy_2023,AT00,SI00,AT,SI,TYNDP border code,TYNDP 2024 Trans.Projects Border field,
+328,proxy_2023,DE00,LUG1,DE,LU,TYNDP border code,TYNDP 2024 Trans.Projects Border field,
+330,proxy_2023,CZ00,SK00,CZ,SK,TYNDP border code,TYNDP 2024 Trans.Projects Border field,
+335,proxy_2023,DE00,DK/NL00,DE,DK,TYNDP border code,TYNDP 2024 Trans.Projects Border field,3-country NSWPH; combined zone code; blank transfer capacity
+341,proxy_2023,RO00,RS00,RO,RS,TYNDP border code,TYNDP 2024 Trans.Projects Border field,RS non-EU
+342,proxy_2023,BG00,RS00,BG,RS,TYNDP border code,TYNDP 2024 Trans.Projects Border field,RS non-EU
+343,proxy_2023,BA00,HR00,BA,HR,TYNDP border code,TYNDP 2024 Trans.Projects Border field,BA non-EU
+349,proxy_2023,IE00,UK00,IE,GB,TYNDP border code,TYNDP 2024 Trans.Projects Border field,
+350,proxy_2023,AL00,MK00,AL,MK,TYNDP border code,TYNDP 2024 Trans.Projects Border field,Both non-EU
+375,proxy_2023,AT00,ITN1,AT,IT,TYNDP border code,TYNDP 2024 Trans.Projects Border field,
+376,proxy_2023,GR00,MK00,GR,MK,TYNDP border code,TYNDP 2024 Trans.Projects Border field,MK non-EU
+377,proxy_2023,BE00,NL00,BE,NL,TYNDP border code,TYNDP 2024 Trans.Projects Border field,
+1041,proxy_2023,GR00,EG00,GR,EG,TYNDP border code,TYNDP 2024 Trans.Projects Border field,EG non-EU
+1048,proxy_2023,GR03,EG00,GR,EG,TYNDP border code,TYNDP 2024 Trans.Projects Border field,EG non-EU; GR03 = Crete
+1049,proxy_2023,BE00,UK00,BE,GB,TYNDP border code,TYNDP 2024 Trans.Projects Border field,
+1050,proxy_2023,DE00,UK00,DE,GB,TYNDP border code,TYNDP 2024 Trans.Projects Border field,
+1058,proxy_2023,CH00,DE00,CH,DE,TYNDP border code,TYNDP 2024 Trans.Projects Border field,CH non-EU
+1066,proxy_2023,BG00,TR00,BG,TR,TYNDP border code,TYNDP 2024 Trans.Projects Border field,TR non-EU
+1067,proxy_2023,GR00,TR00,GR,TR,TYNDP border code,TYNDP 2024 Trans.Projects Border field,TR non-EU
+1068,proxy_2023,LV00,SE03,LV,SE,TYNDP border code,TYNDP 2024 Trans.Projects Border field,
+1074,proxy_2023,HU00,RS00,HU,RS,TYNDP border code,TYNDP 2024 Trans.Projects Border field,RS non-EU
+1085,proxy_2023,MT00,ITSI,MT,IT,TYNDP border code,TYNDP 2024 Trans.Projects Border field,ITSI = Italy Sicily
+1088,proxy_2023,EE00,LV00,EE,LV,TYNDP border code,TYNDP 2024 Trans.Projects Border field,Via offshore bidding zone (OBZ)
+1092,proxy_2023,BE00,DKW1,BE,DK,TYNDP border code,TYNDP 2024 Trans.Projects Border field,Via offshore zone DKOBZ
+1094,proxy_2023,EE00,FI00,EE,FI,TYNDP border code,TYNDP 2024 Trans.Projects Border field,
+1095,proxy_2023,FI00,SE01,FI,SE,TYNDP border code,TYNDP 2024 Trans.Projects Border field,SE01 = Sweden north
+1097,proxy_2023,DKW1,SE03,DK,SE,TYNDP border code,TYNDP 2024 Trans.Projects Border field,
+1100,proxy_2023,CZ00,DE00,CZ,DE,TYNDP border code,TYNDP 2024 Trans.Projects Border field,
+1104,proxy_2023,DE00,LUG1,DE,LU,TYNDP border code,TYNDP 2024 Trans.Projects Border field,
+1105,proxy_2023,GE00,RO00,GE,RO,TYNDP border code,TYNDP 2024 Trans.Projects Border field,GE non-EU
+1106,proxy_2023,DE00,DKE1,DE,DK,TYNDP border code,TYNDP 2024 Trans.Projects Border field,Via Bornholm Energy Island
+1112,proxy_2023,ITS1,GR00,IT,GR,TYNDP border code,TYNDP 2024 Trans.Projects Border field,ITS1 = Italy south
+1138,proxy_2023,MD00,RO00,MD,RO,TYNDP border code,TYNDP 2024 Trans.Projects Border field,MD non-EU
+1171,proxy_2023,CH00,ITN1,CH,IT,TYNDP border code,TYNDP 2024 Trans.Projects Border field,CH non-EU
+1183,proxy_2023,AL00,GR00,AL,GR,TYNDP border code,TYNDP 2024 Trans.Projects Border field,AL non-EU
+1192,proxy_2023,DE00,UK00,DE,GB,TYNDP border code,TYNDP 2024 Trans.Projects Border field,Blank transfer capacity
+1193,proxy_2023,DE00,UK00,DE,GB,TYNDP border code,TYNDP 2024 Trans.Projects Border field,Blank transfer capacity
+1197,proxy_2023,NL00,UK00,NL,GB,TYNDP border code,TYNDP 2024 Trans.Projects Border field,
+1200,proxy_2023,DE00,NO00,DE,NO,TYNDP border code,TYNDP 2024 Trans.Projects Border field,4-country; primary border DE-NO per border field
+1201,proxy_2023,DKW1,NOS0,DK,NO,TYNDP border code,TYNDP 2024 Trans.Projects Border field,
+1202,proxy_2023,FI00,NON1,FI,NO,TYNDP border code,TYNDP 2024 Trans.Projects Border field,NON1 = Norway north
+1207,proxy_2023,DE00,LUG1,DE,LU,TYNDP border code,TYNDP 2024 Trans.Projects Border field,
+1208,proxy_2023,ITCN,TN00,IT,TN,TYNDP border code,TYNDP 2024 Trans.Projects Border field,3-country DZ-IT-TN; primary IT-TN; isolated mode
+1209,proxy_2023,LT00,LV00,LT,LV,TYNDP border code,TYNDP 2024 Trans.Projects Border field,
+1210,proxy_2023,ES00,ITN1,ES,IT,TYNDP border code,TYNDP 2024 Trans.Projects Border field,
+1211,proxy_2023,EEOF,DE00,EE,DE,TYNDP border code,TYNDP 2024 Trans.Projects Border field,3-country DE-EE-LV; primary EE-DE per border field
+1213,proxy_2023,DE00,NL00,DE,NL,TYNDP border code,TYNDP 2024 Trans.Projects Border field,
+1214,proxy_2023,DE00,DKW1,DE,DK,TYNDP border code,TYNDP 2024 Trans.Projects Border field,Blank transfer capacity
+1215,proxy_2023,DE00,MA00,DE,MA,TYNDP border code,TYNDP 2024 Trans.Projects Border field,MA non-EU; isolated mode
+1216,proxy_2023,HU00,RO00,HU,RO,TYNDP border code,TYNDP 2024 Trans.Projects Border field,
+1218,proxy_2023,BE00,NL60,BE,NL,TYNDP border code,TYNDP 2024 Trans.Projects Border field,NL60 = Netherlands offshore
+1226,proxy_2023,BG00,GR00,BG,GR,TYNDP border code,TYNDP 2024 Trans.Projects Border field,8-country corridor; 5 borders listed; primary border BG-GR (first listed)
+1230,proxy_2023,TN00,MT00,TN,MT,TYNDP border code,TYNDP 2024 Trans.Projects Border field,TN non-EU; isolated mode
+1231,proxy_2023,DE00,GR00,DE,GR,TYNDP border code,TYNDP 2024 Trans.Projects Border field,
+1235,proxy_2023,HU00,SK00,HU,SK,TYNDP border code,TYNDP 2024 Trans.Projects Border field,
+1239,proxy_2023,,,SK,UA,TYNDP border code,TYNDP 2024 Trans.Projects Border field,No border code in workbook; blank transfer capacity; UA non-EU
+1240,proxy_2023,,,RO,UA,TYNDP border code,TYNDP 2024 Trans.Projects Border field,No border code in workbook; blank transfer capacity; UA non-EU
