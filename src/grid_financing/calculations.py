@@ -6,10 +6,10 @@ import pandas as pd
 
 DEFAULT_DISCOUNT_RATE = 0.05
 DEFAULT_ASSET_LIFETIME_YEARS = 25
-DEFAULT_UTILIZATION_FACTOR = 0.60
+DEFAULT_UTILIZATION_FACTOR = 0.50
 DEFAULT_CREDIT_THRESHOLD = 0.15
 DEFAULT_DISCOUNT_SENSITIVITIES = (0.04, 0.05, 0.06)
-DEFAULT_UTILIZATION_SENSITIVITIES = (0.50, 0.60, 0.70)
+DEFAULT_UTILIZATION_SENSITIVITIES = (0.50, 0.65, 0.80)
 DEFAULT_CREDIT_THRESHOLDS = (0.10, 0.15, 0.20)
 
 SOCIAL_BCR_SOURCE_COLUMNS = (
@@ -42,9 +42,13 @@ def estimated_annual_congestion_rent(
     utilization_factor: float = DEFAULT_UTILIZATION_FACTOR,
     hourly_abs_price_diff_sum_eur_per_mwh: float | pd.Series | None = None,
 ) -> float | pd.Series:
-    if hourly_abs_price_diff_sum_eur_per_mwh is not None:
-        return hourly_abs_price_diff_sum_eur_per_mwh * capacity_mw * utilization_factor / 1_000_000
-    return avg_abs_price_diff_eur_per_mwh * capacity_mw * utilization_factor * 8760 / 1_000_000
+    fallback = avg_abs_price_diff_eur_per_mwh * capacity_mw * utilization_factor * 8760 / 1_000_000
+    if hourly_abs_price_diff_sum_eur_per_mwh is None:
+        return fallback
+    if isinstance(hourly_abs_price_diff_sum_eur_per_mwh, pd.Series):
+        hourly_rent = hourly_abs_price_diff_sum_eur_per_mwh * capacity_mw * utilization_factor / 1_000_000
+        return hourly_rent.where(hourly_abs_price_diff_sum_eur_per_mwh.notna(), fallback)
+    return hourly_abs_price_diff_sum_eur_per_mwh * capacity_mw * utilization_factor / 1_000_000
 
 
 def safe_ratio(numerator: float | pd.Series, denominator: float | pd.Series) -> float | pd.Series:
@@ -103,9 +107,13 @@ def calculate_project_metrics(
         utilization_factor,
         hourly_abs_price_diff_sum_eur_per_mwh=df.get("hourly_abs_price_diff_sum_eur_per_mwh"),
     )
-    df["congestion_rent_basis"] = (
-        "hourly_price_sum" if "hourly_abs_price_diff_sum_eur_per_mwh" in df.columns else "annualized_average_spread"
-    )
+    hourly_sum = df.get("hourly_abs_price_diff_sum_eur_per_mwh")
+    if hourly_sum is not None:
+        df["congestion_rent_basis"] = pd.Series(pd.NA, index=df.index, dtype="object")
+        df.loc[hourly_sum.notna(), "congestion_rent_basis"] = "hourly_price_sum"
+        df.loc[hourly_sum.isna() & df["avg_price_diff_eur_per_mwh"].notna(), "congestion_rent_basis"] = "annualized_average_spread"
+    else:
+        df["congestion_rent_basis"] = pd.Series("annualized_average_spread", index=df.index)
     df["commercial_ratio"] = safe_ratio(
         df["estimated_congestion_rent_meur_per_year"],
         df["annualized_capex_meur_per_year"],

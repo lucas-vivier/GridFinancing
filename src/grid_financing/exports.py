@@ -119,21 +119,54 @@ def export_outputs(project_df: pd.DataFrame, *, base_path: Path = PROJECT_ROOT) 
     scatter_df.to_csv(scatter_dataset_csv, index=False)
     stack_df.to_csv(stack_dataset_csv, index=False)
 
+    scatter_plot = (
+        scatter_df[
+            scatter_df["commercial_ratio"].notna() & scatter_df["credit_constraint_score"].notna()
+        ]
+        .copy()
+        .assign(
+            financing_track_display=lambda df: df["financing_track"].map(
+                {
+                    TRACK_1: "Track 1: Market-financed",
+                    TRACK_2: "Track 2: Regulated + CBCA",
+                    TRACK_3: "Track 3: Targeted EU support",
+                }
+            ),
+            commercial_ratio_display=lambda df: df["commercial_ratio"].clip(upper=10),
+            credit_constraint_score_display=lambda df: df["credit_constraint_score"].clip(upper=0.5),
+        )
+    )
     scatter_fig = px.scatter(
-        scatter_df,
-        x="commercial_ratio",
-        y="credit_constraint_score",
+        scatter_plot,
+        x="commercial_ratio_display",
+        y="credit_constraint_score_display",
         size="capex_meur",
-        color="financing_track",
+        color="financing_track_display",
         hover_name="project_name",
+        hover_data={
+            "commercial_ratio": ":.2f",
+            "credit_constraint_score": ":.3f",
+            "commercial_ratio_display": False,
+            "credit_constraint_score_display": False,
+        },
         title="Financing triage scatter",
         labels={
-            "commercial_ratio": "Commercial viability ratio",
-            "credit_constraint_score": "Credit constraint score",
+            "commercial_ratio_display": "Commercial viability ratio (capped at 10 for display)",
+            "credit_constraint_score_display": "Binding credit-constraint score (capped at 0.5)",
+            "financing_track_display": "Financing track",
+        },
+        category_orders={
+            "financing_track_display": [
+                "Track 1: Market-financed",
+                "Track 2: Regulated + CBCA",
+                "Track 3: Targeted EU support",
+            ]
         },
     )
     scatter_fig.add_vline(x=1.0)
     scatter_fig.add_hline(y=0.15)
+    scatter_fig.update_xaxes(range=[0, 10])
+    scatter_fig.update_yaxes(range=[0, 0.5])
     scatter_fig.write_html(scatter_html)
 
     stack_fig = px.bar(

@@ -34,6 +34,17 @@ def test_congestion_rent_formula_uses_hourly_sum_when_available() -> None:
     assert math.isclose(rent, 52.56, rel_tol=1e-6)
 
 
+def test_congestion_rent_formula_falls_back_per_row_when_hourly_sum_missing() -> None:
+    rent = estimated_annual_congestion_rent(
+        pd.Series([10.0, 10.0]),
+        pd.Series([1000.0, 1000.0]),
+        0.60,
+        hourly_abs_price_diff_sum_eur_per_mwh=pd.Series([87_600.0, pd.NA]),
+    )
+    assert math.isclose(float(rent.iloc[0]), 52.56, rel_tol=1e-6)
+    assert math.isclose(float(rent.iloc[1]), 52.56, rel_tol=1e-6)
+
+
 def test_social_bcr_ratio() -> None:
     assert social_bcr(200, 100) == 2
 
@@ -68,6 +79,7 @@ def test_calculate_project_metrics_populates_core_columns() -> None:
     )
     result = calculate_project_metrics(df)
     row = result.iloc[0]
+    assert math.isclose(row["utilization_factor"], 0.5, rel_tol=1e-9)
     assert row["annualized_capex_meur_per_year"] > 0
     assert row["estimated_congestion_rent_meur_per_year"] > 0
     assert row["congestion_rent_basis"] == "hourly_price_sum"
@@ -75,6 +87,40 @@ def test_calculate_project_metrics_populates_core_columns() -> None:
     assert row["social_bcr"] > 0
     assert math.isclose(row["credit_constraint_score_b"], 0.2, rel_tol=1e-9)
     assert bool(row["credit_constrained"]) is True
+
+
+def test_calculate_project_metrics_marks_congestion_basis_per_row() -> None:
+    df = pd.DataFrame(
+        [
+            {
+                "project_id": 1,
+                "capex_meur": 2000,
+                "capacity_mw": 1000,
+                "avg_price_diff_eur_per_mwh": 10,
+                "hourly_abs_price_diff_sum_eur_per_mwh": 87_600,
+            },
+            {
+                "project_id": 2,
+                "capex_meur": 2000,
+                "capacity_mw": 1000,
+                "avg_price_diff_eur_per_mwh": 10,
+                "hourly_abs_price_diff_sum_eur_per_mwh": pd.NA,
+            },
+            {
+                "project_id": 3,
+                "capex_meur": 2000,
+                "capacity_mw": 1000,
+                "avg_price_diff_eur_per_mwh": pd.NA,
+                "hourly_abs_price_diff_sum_eur_per_mwh": pd.NA,
+            },
+        ]
+    )
+
+    result = calculate_project_metrics(df)
+
+    assert result.loc[result["project_id"] == 1, "congestion_rent_basis"].item() == "hourly_price_sum"
+    assert result.loc[result["project_id"] == 2, "congestion_rent_basis"].item() == "annualized_average_spread"
+    assert pd.isna(result.loc[result["project_id"] == 3, "congestion_rent_basis"].item())
 
 
 def test_build_sensitivity_cases_expands_dimensions() -> None:

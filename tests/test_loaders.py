@@ -166,3 +166,28 @@ def test_build_price_metrics_base_case_labels_actual_selected_year(monkeypatch) 
 
     assert metrics.loc[0, "data_year"] == 2021
     assert metrics.loc[0, "price_scenario"] == "proxy_2021"
+
+
+def test_build_price_metrics_base_case_leaves_missing_scenario_when_no_full_year(monkeypatch) -> None:
+    project_df = pd.DataFrame([{"project_id": 1, "country_a": "FR", "country_b": "DE"}])
+    partial_hours = pd.date_range("2021-01-01", periods=24, freq="h", tz="UTC")
+    price_df = pd.DataFrame(
+        {
+            "iso3_code": ["FRA"] * len(partial_hours) + ["DEU"] * len(partial_hours),
+            "datetime_utc": list(partial_hours) + list(partial_hours),
+            "price_eur_per_mwh": [40.0] * len(partial_hours) + [30.0] * len(partial_hours),
+            "data_year": [2021] * (2 * len(partial_hours)),
+        }
+    )
+
+    monkeypatch.setattr("grid_financing.loaders.load_manual_csv", lambda _: pd.DataFrame())
+    monkeypatch.setattr("grid_financing.loaders.load_local_hourly_price_data", lambda: price_df)
+    monkeypatch.setattr(
+        "grid_financing.loaders.resolve_source",
+        lambda _: type("ResolvedSource", (), {"path": Path("data/european_wholesale_electricity_price_data_hourly/all_countries.csv")})(),
+    )
+
+    metrics = build_price_metrics(project_df)
+
+    assert pd.isna(metrics.loc[0, "price_scenario"])
+    assert pd.isna(metrics.loc[0, "data_year"])

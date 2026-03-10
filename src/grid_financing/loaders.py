@@ -652,9 +652,7 @@ def build_price_metrics(
         else:
             if requested_years is None:
                 metrics = _build_pair_metrics(price_df, str(country_a), str(country_b))
-                scenario_name = (
-                    f"proxy_{int(metrics['data_year'])}" if pd.notna(metrics.get("data_year")) else "historical_proxy"
-                )
+                scenario_name = f"proxy_{int(metrics['data_year'])}" if pd.notna(metrics.get("data_year")) else pd.NA
                 metrics_rows = [{**metrics, "price_scenario": scenario_name}]
             else:
                 metrics_rows = []
@@ -678,7 +676,31 @@ def build_price_metrics(
                     **metrics,
                 }
             )
-    return pd.DataFrame(rows)
+    result = pd.DataFrame(rows)
+    expected_columns = [
+        "project_id",
+        "zone_a",
+        "zone_b",
+        "country_a",
+        "country_b",
+        "avg_price_diff_eur_per_mwh",
+        "hourly_abs_price_diff_sum_eur_per_mwh",
+        "hourly_observation_count",
+        "price_volatility_a_eur_per_mwh",
+        "price_volatility_b_eur_per_mwh",
+        "price_correlation",
+        "directional_flow_a_to_b_share",
+        "data_year",
+        "source_name",
+        "source_type",
+        "source_url",
+        "notes",
+        "price_scenario",
+    ]
+    for column in expected_columns:
+        if column not in result.columns:
+            result[column] = pd.NA
+    return result[expected_columns]
 
 
 def build_project_master_table(*, development_mode: bool = True, price_years: Iterable[int] | None = None) -> pd.DataFrame:
@@ -704,7 +726,8 @@ def build_project_master_table(*, development_mode: bool = True, price_years: It
     master["assumptions_note"] = (
         "Capacity uses the larger directional transfer-capacity value when both are present. "
         "Price metrics default to the local hourly CSV in development mode. "
-        "Estimated congestion rent is a majorant based on the sum of absolute hourly price spreads."
+        "Estimated congestion rent is a majorant based on the sum of absolute hourly price spreads, "
+        "with a 50% base-case utilization factor as a proxy for equivalent congested or monetizable hours."
     )
     master["price_input_mode"] = "development-local-proxy" if development_mode else "manual-or-external"
     if development_mode and price_years is not None:

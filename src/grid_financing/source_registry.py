@@ -177,8 +177,9 @@ SOURCE_REGISTRY: dict[str, SourceDescriptor] = {
         kind="manual-download-required",
         canonical_paths=(PROJECT_ROOT / "data" / "manual" / "project_participants.csv",),
         missing_message=(
-            "Missing `data/manual/project_participants.csv`. Add participant-level country and "
-            "CAPEX split records there for multi-country projects and non-50/50 CBCAs."
+            "Missing `data/manual/project_participants.csv`. Add the seeded participant ordering "
+            "and CAPEX split assumptions there, then replace them with project-specific CBCA or "
+            "sponsor allocations where known."
         ),
         schema=MANUAL_SCHEMAS["project_participants"],
     ),
@@ -255,4 +256,3 @@ def ensure_columns_present(columns: Iterable[str], required: Iterable[str], cont
     missing = [column for column in required if column not in columns]
     if missing:
         raise ValueError(f"{context} is missing required columns: {', '.join(missing)}")
-

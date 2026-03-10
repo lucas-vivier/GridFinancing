@@ -56,7 +56,7 @@ This document describes how each file in `data/manual/` was compiled, what sourc
 | `project_id` | TYNDP 2024 `Trans.Projects` sheet, `Project ID` column | Direct extraction |
 | `country_code` | TYNDP 2024 `Trans.Projects` sheet, `Country` column | Parsed from semicolon-delimited ISO 2-letter codes (e.g., `ES ;FR` → `ES`, `FR`) |
 | `tso_name` | ENTSO-E member list cross-referenced with country | Assigned the main TSO per country. For non-EU countries (ME, RS, BA, TN, etc.), TSO name left blank |
-| `capex_share_pct` | Default assumption | **50/50 for two-country projects** (standard absent a specific CBCA decision). For multi-country projects (3+), shares split equally as a starting estimate. These are placeholders — actual CBCA splits should override when known |
+| `capex_share_pct` | Default assumption | **50/50 for two-country projects** (standard absent a specific CBCA decision). For multi-country projects (3+), shares split equally as a starting estimate. These are placeholders; actual CBCA or sponsor-specific cost allocations should override when known |
 | `is_primary_border_side` | TYNDP 2024 Border field, project ordering | First-listed country marked as primary; this is a convention, not a definitive assignment |
 | `participant_order` | Ordering within the Country field | Sequential numbering per project |
 
@@ -65,6 +65,12 @@ This document describes how each file in `data/manual/` was compiled, what sourc
 - For multi-country projects (40, 124, 170, 219, 227, 335, 1200, 1208, 1211, 1226), shares are split equally as a placeholder
 - Non-EU countries (ME, RS, BA, TN, DZ, EG, IL, MK, AL, MA, UA, GE, TR, CH, GB, NO) are included as participants but may not have TSO credit data in the reference table
 - TSO names may need refinement for countries with multiple TSOs or recent reorganizations
+- The current notebook pipeline is still **bilateral** for the credit-constraint step: it sorts participants by `participant_order`, maps the first record to side `A` and the second to side `B`, and ignores third and later participants in the side-level score. For genuine multi-country projects, this is a simplification rather than a faithful financing allocation
+
+**How this should be better covered:**
+- Replace default `capex_share_pct` placeholders with verified CBCA decisions, sponsor agreements, or project-specific investment splits
+- Move from the current `A/B` side abstraction to a true participant-level financing model that scores every participant country or TSO separately and then aggregates at project level
+- Add an explicit field distinguishing the **primary price border** used for congestion-rent estimation from the **full participant set** used for financing allocation, since these are not always the same thing
 
 ---
 
