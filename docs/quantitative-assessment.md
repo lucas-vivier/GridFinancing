@@ -293,10 +293,10 @@ Key metric: **How much CEF money is freed up by letting Track 1 projects use pri
 
 **Chart A — Financing triage scatter plot:**
 - X-axis: Commercial Viability Ratio (congestion rent / annualized CAPEX)
-- Y-axis: Credit Constraint Score (project CAPEX share / weakest TSO RAB)
+- Y-axis: Credit Constraint Score (project CAPEX share / binding TSO RAB)
 - Dot size: total CAPEX
 - Dot color: financing track (green = merchant, blue = regulated, red = constrained)
-- Vertical line at x = 0.7 (merchant threshold)
+- Vertical line at x = 1.0 (merchant threshold)
 - Horizontal line at y = 0.15 (credit constraint threshold)
 - Label key projects (ElecLink, Celtic, GSI, Bay of Biscay, Pyrenees, NeuConnect)
 
@@ -314,7 +314,7 @@ Key metric: **How much CEF money is freed up by letting Track 1 projects use pri
 
 ## 4. Sensitivities to Run
 
-1. **Utilization factor:** Run all calculations at 50%, 60%, 70% utilization → shows how sensitive merchant viability is
+1. **Congestion-rate assumption:** Run all calculations at 30%, 50%, 70% → shows how sensitive merchant viability is
 2. **Discount rate:** Run at 4%, 5%, 6% → changes annualized CAPEX and therefore all ratios
 3. **Price scenario:** If forward-looking price data available, compare current prices vs. projected 2030/2040 prices (VRE penetration will change spreads)
 4. **Credit constraint threshold:** Test at 0.10, 0.15, 0.20 → shows how many projects shift between Track 2 and Track 3
@@ -329,7 +329,7 @@ Key metric: **How much CEF money is freed up by letting Track 1 projects use pri
 4. **The cannibalization effect:** building more interconnectors reduces price differentials on that border, lowering congestion rents for subsequent projects. The analysis treats each project independently.
 5. **TSO credit data requires manual verification** — automated sources may be incomplete
 6. **CAPEX estimates from TYNDP are promoter-reported** — actual costs frequently exceed initial estimates (cost overruns are common in large infrastructure)
-7. **The classification thresholds (0.7, 0.15) are judgmental** — the sensitivity analysis partially addresses this, but the thresholds should be validated against real project financing outcomes
+7. **The classification thresholds (1.0, 0.15) are judgmental** — the sensitivity analysis partially addresses this, but the thresholds should be validated against real project financing outcomes
 
 ---
 

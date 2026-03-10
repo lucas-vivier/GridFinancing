@@ -87,3 +87,161 @@ With more time, the next step would be to apply this triage systematically to a 
 
 Europe’s interconnection debate has moved beyond whether more cross-border capacity is needed. The harder question is how to finance it intelligently. Europe may well need more public money, but it also needs to make better use of the money already available. The answer is not one instrument, but three. Use markets selectively where markets can work. Use clearer allocation rules where capable partners cannot agree. Use public support and risk-sharing where financing constraints would otherwise block strategically valuable projects. That financing triage is still missing from Europe’s current grid agenda.
 
+## Annex: methodology and assumptions
+
+This annex explains the method in plain language. The aim is not to reproduce every line of the model, but to show clearly what question each metric is trying to answer, what sources it relies on, and what assumptions sit underneath the results.
+
+### 1. What this methodology is trying to do
+
+The policy question in this paper is simple: if Europe wants more interconnection, which projects can pay for themselves, which are mainly blocked by cost-sharing disputes, and which need targeted public support because one side cannot carry the financing burden?
+
+To answer that question, the analysis applies three practical tests to each project.
+
+- **A market test:** could the project plausibly recover its costs from the value of cross-border trade?
+- **A public-value test:** is the project beneficial for Europe even if it does not pay for itself commercially?
+- **A financing-capacity test:** can the relevant TSOs and governments realistically raise the money?
+
+That is why the paper speaks of a financing triage. It is a way of sorting projects by the kind of financing problem they face, rather than treating all interconnectors as if they needed the same policy response.
+
+### 2. What projects are covered
+
+The base dataset covers 100 cross-border electricity transmission projects from the TYNDP 2024 project sheets. The unit of analysis is the individual project: one row per project in the working table.
+
+The table keeps the full cross-border pipeline, including projects under construction. For financing-gap discussions, however, the most policy-relevant part of the pipeline is normally the set of projects still under consideration, in planning, or in permitting.
+
+In the current processed output, 76 projects can be assigned to one of the three financing tracks and 24 remain unclassified because key inputs are missing. The main missing items in the current run are credit-reference data, price inputs, or transfer-capacity values.
+
+### 3. Main sources and what each one is used for
+
+The analysis combines four source layers, each for a different purpose.
+
+- **TYNDP 2024 project sheets:** these are the backbone of the exercise. They provide the project list, project status, border information, transfer-capacity values, project CAPEX, and the main welfare metrics used for the social-benefit screen.
+- **TYNDP 2022 CBA workbook:** this is used as fallback and cross-check material where older welfare values are still useful.
+- **Local hourly electricity-price data:** this is used to approximate the commercial value of moving power across borders. In the current workflow, the price input comes from `data/european_wholesale_electricity_price_data_hourly/all_countries.csv`, which is a country-level proxy dataset rather than a full bidding-zone ENTSO-E extraction.
+- **Manual reference tables:** these provide information that is not available in a single clean public dataset, especially TSO credit ratings, TSO regulated asset bases, sovereign fiscal indicators, participant-level CAPEX-share assumptions, border mappings, and any approved project overrides.
+
+In plain terms, TYNDP tells us what the projects are and what system value ENTSO-E assigns to them. Price data helps us ask whether markets might finance them. Credit and fiscal data helps us ask whether the public or regulated side can realistically carry them.
+
+### 4. Why the commercial screen uses congestion rents
+
+The first question is whether a project could plausibly attract merchant or hybrid financing. For that, the model needs a proxy for the revenue opportunity created by the interconnector.
+
+The basic logic is straightforward. An interconnector is valuable to the market when electricity prices differ across two connected areas. If power is cheaper on one side and more expensive on the other, traders are willing to pay for access to the line. The larger and more persistent the price gap, the larger the potential trading value of the connection.
+
+That is why the model uses **congestion rent** as the commercial screen. Congestion rent is not a perfect measure of future investor revenue, but it is the clearest first-pass indicator of whether the line creates tradable market value.
+
+The model estimates annual congestion rent by combining three elements:
+
+- the observed price difference between the two connected markets;
+- the size of the line, measured by transfer capacity;
+- an assumed utilisation factor, which recognises that a line is not fully used at full value in every hour of the year.
+
+The formula is:
+
+```text
+Estimated annual congestion rent = price spread x capacity x utilisation
+Commercial ratio = estimated annual congestion rent / annualised CAPEX
+```
+
+In the current implementation, where full hourly overlaps exist, the model uses the sum of the absolute hourly price spreads over the year. This is done for a policy reason: interconnectors create value whenever there is a price difference, regardless of which direction the profitable flow runs in that hour. Using absolute hourly spreads therefore captures the total gross trading opportunity across the year, including hours when the economic direction reverses.
+
+The base utilisation factor is 0.60. This is a simplifying assumption. It reflects the fact that commercial use is significant but not perfect: not every hour with a price difference can be monetised fully, and outages, ramping, operational constraints, and market conditions all reduce realised revenue relative to a theoretical maximum.
+
+The interpretation is intuitive:
+
+- if estimated trading value is higher than annualised project cost, the project looks commercially financeable;
+- if it is not, the project likely needs a regulated framework, public support, or both.
+
+This is why congestion rent is used here. It is not because congestion revenue is the only possible income stream, but because it is the most direct and observable measure of whether the market itself is likely to pay for the asset.
+
+### 5. Why the public-value screen uses social benefits
+
+A project can fail the commercial test and still be a good project for Europe. That is why a second test is needed.
+
+The question here is not whether a private investor would build the line, but whether Europe as a whole gains from the project. The model therefore uses the TYNDP measure of annual socio-economic welfare gain, usually labelled `ΔSEW`, as the core public-value indicator.
+
+This is the right metric for a policymaker because it asks the system-level question: does the project reduce total system costs and improve overall welfare enough to justify the investment? In other words, even if the project does not generate enough direct congestion revenue to pay for itself, does it still make the European electricity system better off?
+
+The model compares that annual welfare gain with annualised project cost:
+
+```text
+Social BCR = annual socio-economic welfare gain / annualised CAPEX
+```
+
+This is a standard policy logic. It puts benefits and costs on the same annual footing.
+
+- if the ratio is above 1, the project appears to create more annual welfare than it costs on an annualised basis;
+- if the ratio is below 1, the public case is weaker and may need closer scrutiny.
+
+The preferred welfare input in the current implementation is the TYNDP 2024 `2030NT-EU27` scenario, with fallbacks to other available 2024 and then 2022 welfare fields when needed.
+
+The reason for using TYNDP welfare values is practical as well as conceptual. They are the most established Europe-wide attempt to measure the broader system benefits of interconnection using a common planning framework. For a policy brief, that makes them a more appropriate basis for the public-value screen than looking only at private cash flows.
+
+### 6. Why annual costs are used instead of total CAPEX alone
+
+Both the commercial test and the social-benefit test compare annual value with annualised cost, rather than comparing annual value with total one-off CAPEX. That is deliberate.
+
+Interconnectors are long-lived assets. A project with a large upfront cost can still be worthwhile if it delivers value steadily over many years. Annualising CAPEX is therefore a way of making the comparison fair: it translates the upfront investment into an approximate yearly cost that can be compared with yearly benefits.
+
+The current implementation uses a real discount rate of 5 percent and an asset life of 25 years. This produces a capital recovery factor of about 0.07095.
+
+```text
+CRF = r / (1 - (1 + r)^(-n))
+Annualised CAPEX = CAPEX x CRF
+```
+
+This is a relatively strict assumption. A longer asset life would lower annualised cost and make more projects appear commercially viable. That should be kept in mind when reading the results.
+
+### 7. Why the financing-capacity screen uses TSO RAB and credit indicators
+
+Even when a project looks socially valuable, it may still stall because one side cannot carry the financing burden. That is why the analysis adds a third screen.
+
+The simplest practical test is to ask whether the project is large relative to the balance-sheet capacity of the TSO that would have to fund it. The model uses the ratio of the project CAPEX share to the TSO regulated asset base, or RAB:
+
+```text
+Credit-constraint score = project CAPEX share / TSO RAB
+```
+
+The intuition is simple. A project that is small relative to the TSO asset base is usually manageable. A project that is very large relative to that asset base is much harder to finance, even if it is economically sensible.
+
+This screen is complemented by two additional warning lights:
+
+- whether the TSO is below investment grade;
+- whether the sovereign appears fiscally constrained, defined here as debt above 100 percent of GDP and a deficit above 3 percent of GDP.
+
+In the current implementation, a project is treated as credit-constrained if any of those conditions is triggered on either side of the interconnector. The score threshold is 15 percent of TSO RAB.
+
+This is not meant to be a full credit model. It is a policy-screening device to identify cases where the problem is not lack of system value, but lack of financing capacity.
+
+### 8. How projects are assigned to tracks
+
+The current implementation uses a simple classification rule.
+
+- **Track 1: market-financed (merchant or hybrid)** if the commercial ratio is strictly above 1.0.
+- **Track 2: regulated plus CBCA** if the commercial ratio is not above 1.0 and the project is not flagged as credit-constrained.
+- **Track 3: credit-constrained, targeted EU support** if the commercial ratio is not above 1.0 and at least one side is flagged as credit-constrained.
+- **Unclassified** if key inputs needed for the screen are missing.
+
+This means the model first asks whether markets can plausibly carry the project. If not, it then asks whether the regulated parties can carry it. Only when the answer to both questions is effectively no does the project fall into the targeted-support track.
+
+### 9. Financing-stack assumptions used after classification
+
+Once projects are placed into tracks, the model applies a stylised financing mix in order to estimate how much public support each track might require.
+
+- **Track 1:** 100 percent private capital.
+- **Track 2:** 30 percent CEF grant, 25 percent EIB loan, 45 percent TSO balance sheet and tariff recovery.
+- **Track 3:** 50 percent CEF grant for non-cohesion cases or 85 percent for cohesion cases, plus 20 percent EIB loan, with the remainder on the TSO balance sheet.
+
+These are not claims about the exact financing structure of each project. They are scenario assumptions used to illustrate what different policy approaches would imply for the overall financing stack.
+
+### 10. Main assumptions and limitations
+
+The results should be read as a transparent screening exercise, not as a bankable project appraisal. Three limitations are particularly important.
+
+First, the commercial screen uses proxy price data. The current notebook relies on local country-level hourly prices rather than full forward-looking bidding-zone modelling. That makes the congestion-rent estimate useful for ranking and triage, but not a substitute for a full revenue forecast.
+
+Second, the participant CAPEX shares are seeded assumptions unless replaced by verified CBCA decisions or sponsor agreements. For two-country projects, the seed table generally assumes a 50/50 split. For multi-country projects, it uses equal shares as a placeholder. That can materially affect the financing-capacity diagnosis.
+
+Third, the current credit model is still effectively bilateral. For multi-country projects, the present implementation maps participants into side `A` and side `B` and can ignore third and later participants in the side-level score. That is acceptable for a first-pass policy screen, but it is not a final treatment of complex corridors.
+
+The practical implication is straightforward. This methodology is well suited to answering a policy-brief question: which projects look market-financeable, which mainly need clearer cost allocation, and which need targeted EU support? It is not designed to replace formal CBCA decisions, project due diligence, or full forward-looking power-system modelling.
