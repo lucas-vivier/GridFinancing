@@ -109,6 +109,12 @@
       border-radius: 3px;
     }
 
+    .hero .tag--draft {
+      background: rgba(255, 209, 102, 0.22);
+      color: #ffe7b0;
+      border: 1px solid rgba(255, 231, 176, 0.35);
+    }
+
     .hero h1 {
       font-family: var(--font-serif);
       font-size: 2.75rem;
@@ -339,6 +345,39 @@
       font-size: 0.95rem;
       color: var(--color-accent-dark);
       line-height: 1.65;
+    }
+
+    .draft-banner {
+      max-width: var(--max-width);
+      margin: -1.4rem auto 0;
+      padding: 0 0.75rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .draft-banner__inner {
+      background: linear-gradient(135deg, #fff7e0 0%, #fff1c7 100%);
+      border: 1px solid #f0cf6a;
+      border-radius: 12px;
+      padding: 1rem 1.1rem;
+      box-shadow: 0 12px 24px rgba(30, 30, 30, 0.08);
+    }
+
+    .draft-banner__eyebrow {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #8a5a00;
+      margin-bottom: 0.35rem;
+    }
+
+    .draft-banner__inner p {
+      margin: 0;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #5f4700;
     }
 
     .track-grid {
@@ -577,6 +616,123 @@
     .reference-list strong {
       color: var(--color-text);
     }
+
+    .methodology {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--color-border);
+      font-size: 0.97rem;
+    }
+
+    .methodology-intro {
+      margin: 1rem 0 1.75rem;
+    }
+
+    .methodology-intro p:last-child {
+      margin-bottom: 0;
+    }
+
+    .method-formula {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0.85rem 0 1rem;
+      padding: 0.8rem 1rem;
+      color: var(--color-text);
+      border: 1px solid var(--color-border);
+      border-radius: 10px;
+      background: #fbfcfd;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      min-width: 18rem;
+      max-width: 100%;
+      text-align: center;
+    }
+
+    .method-formula__num,
+    .method-formula__den {
+      display: block;
+      width: 100%;
+    }
+
+    .method-formula__bar {
+      display: block;
+      width: 100%;
+      border-top: 1px solid #9aa5b1;
+      margin: 0.35rem 0;
+    }
+
+    .methodology-block {
+      margin: 2rem 0;
+    }
+
+    .methodology-block h3 {
+      margin-bottom: 0.75rem;
+      font-size: 1.05rem;
+    }
+
+    .methodology-block ol,
+    .methodology-block ul {
+      margin: 0.6rem 0 1.25rem 1.2rem;
+    }
+
+    .methodology-note {
+      font-size: 0.92rem;
+      color: var(--color-text-secondary);
+    }
+
+    .methodology .compact-list li {
+      margin-bottom: 0.4rem;
+    }
+
+    .figure-block {
+      margin: 2rem 0 2.5rem;
+    }
+
+    .figure-frame {
+      width: 100%;
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #ffffff;
+    }
+
+    .figure-frame iframe {
+      display: block;
+      width: 100%;
+      border: 0;
+      background: #ffffff;
+    }
+
+    .figure-frame--tall iframe {
+      height: 660px;
+    }
+
+    .figure-frame--medium iframe {
+      height: 560px;
+    }
+
+    .figure-caption {
+      margin-top: 0.9rem;
+      font-size: 0.92rem;
+      color: var(--color-text-secondary);
+      line-height: 1.65;
+    }
+
+    .figure-caption strong {
+      color: var(--color-text);
+    }
+
+    .figure-caption p {
+      margin-bottom: 0.55rem;
+      font-size: 0.92rem;
+      line-height: 1.65;
+    }
+
+    .figure-caption p:last-child {
+      margin-bottom: 0;
+    }
   </style>
 </head>
 <body>
@@ -597,10 +753,18 @@
       <span class="tag">Energy Policy</span>
       <span class="tag">European Grids</span>
       <span class="tag">EN</span>
+      <span class="tag tag--draft">Draft Mock</span>
     </div>
     <h1>Who Pays for Europe's Grid?</h1>
     <p class="subtitle">A financing triage for cross-border interconnection</p>
   </header>
+
+  <div class="draft-banner" role="note" aria-label="Draft status notice">
+    <div class="draft-banner__inner">
+      <div class="draft-banner__eyebrow">Draft Notice</div>
+      <p>This page is a mock working draft. The figures, claims, classifications, and methods have not been fully tested, independently verified, or publication-checked. Treat all results with caution. It is not ready for publication.</p>
+    </div>
+  </div>
 
   <!-- Author & Meta -->
   <div class="article-meta">
@@ -633,6 +797,7 @@
         <li><a href="#section-5">A practical legislative package</a></li>
         <li><a href="#conclusion">Conclusion</a></li>
         <li><a href="#references">References</a></li>
+        <li><a href="#supplementary-methodology">Supplementary methodology</a></li>
       </ol>
     </aside>
 
@@ -641,9 +806,9 @@
 
       <div class="exec-summary" id="exec-summary">
         <h2>Executive Summary</h2>
-        <p>Europe needs around €150 billion of investment in cross-border interconnection by 2040.<sup class="citation"><a href="#ref-1">[1]</a></sup> Even with the Commission's proposal to raise CEF-Energy from about €6 billion in 2021-2027 to about €30 billion in 2028-2034, a substantial financing gap would still remain.<sup class="citation"><a href="#ref-1">[1]</a></sup> That financing gap has been identified for years, but the pressure is now greater because rapid deployment of variable renewable electricity increases the value of moving faster.</p>
-        <p>The key policy question is no longer only how to build the grid, but how to pay for it intelligently. This paper argues that Europe does not face one interconnection financing problem, but three. Some corridors may be able to attract private capital if the regulatory framework is better adapted. Some projects are blocked because countries that could in principle finance them cannot agree on cost allocation. Others are stalled because one side cannot bear the upfront cost or associated risks, even where the long-term system value is high.</p>
-        <p>Europe will likely need both additional public resources and better mobilisation of private capital, but it also needs to use existing public money more efficiently. That requires targeting support to the projects that truly need it.</p>
+        <p>Europe needs around €150 billion of investment in cross-border interconnection by 2040.<sup class="citation"><a href="#ref-1">[1]</a></sup> The Commission has proposed a major increase in the Connecting Europe Facility for Energy (CEF-E), from about €6 billion in 2021-2027 to about €30 billion in 2028-2034, but this would still not be enough to close the financing gap.<sup class="citation"><a href="#ref-1">[1]</a></sup> That financing gap has been visible for years, but it is becoming more pressing as variable renewable electricity expands and the cost of delay increases.</p>
+        <p>The key policy question is no longer only how to build the grid, but how to finance it in a more effective and targeted way. This policy brief argues that Europe does not face one interconnection financing problem, but three. Some corridors may be able to attract private capital if the regulatory framework is better adapted. Some projects are blocked because countries that could in principle finance them cannot agree on cost allocation. Others are stalled because one side cannot bear the upfront cost or associated risks, even where the long-term system value is high.</p>
+        <p>Europe will likely need both additional public resources and better mobilisation of private capital, but it also needs to use existing public money more efficiently. That requires targeting support to the projects that truly need it. In practice, that means using market-based models selectively where commercial conditions are strong, applying clearer cost-allocation rules where capable countries cannot agree, and concentrating public support and risk-sharing instruments where financing constraints make socially valuable projects impossible. If this triage were applied systematically, scarce public support could be directed more consistently toward the projects that need it most.</p>
       </div>
 
       <div class="repo-banner">
@@ -675,7 +840,7 @@
         <article class="track-card track-card--allocation">
           <div class="track-label">Track 2</div>
           <h3>Cost-allocation disputes between capable countries</h3>
-          <p>Cases where the project is financeable in principle, but countries cannot agree on who should pay and how benefits should be shared.</p>
+          <p>Cases where the project can in principle be financed, but countries cannot agree on who should pay and how benefits should be shared.</p>
           <div class="track-meta">
             <div class="track-meta-row">
               <span>Main bottleneck</span>
@@ -715,59 +880,103 @@
 
       <p>Merchant-style investment should not be understood as a single model. At one end is the pure merchant interconnector, where investors rely primarily on market revenues and bear most price and volume risk. ElecLink, between France and the United Kingdom through the Channel Tunnel, is the clearest recent example: it was developed as a privately financed interconnector and shows that strong congestion value can support market-based recovery, with revenue of about €560 million in 2023 and about €280 million in 2024 despite market normalisation and outages.<sup class="citation"><a href="#ref-3">[3]</a></sup> BritNed, between the Netherlands and the United Kingdom, provides an earlier example of a merchant-style link operating under an exempted model. But private capital does not have to mean exposure to fully unhedged market risk. Intermediate arrangements can make revenues more predictable and therefore improve bankability. NeuConnect, between Germany and the United Kingdom, illustrates this through a cap-and-floor regime, which keeps a market-based logic while limiting downside and upside and can therefore make debt financing easier and reduce the cost of capital.<sup class="citation"><a href="#ref-4">[4]</a></sup></p>
 
-      <p>The problem is that EU law still treats the merchant route as an exception. Article 63 of Regulation 2019/943 requires case-by-case exemption and places a heavy evidentiary burden on the developer.<sup class="citation"><a href="#ref-5">[5]</a></sup> That architecture is poorly suited to a system where renewable penetration, volatility and recurring price spreads may make merchant-style finance more plausible on some corridors over time.<sup class="citation"><a href="#ref-2">[2]</a></sup></p>
+      <p>The problem is that EU law still treats the merchant route as an exception. Article 63 of Regulation 2019/943 requires a case-by-case exemption and places a heavy evidentiary burden on the developer.<sup class="citation"><a href="#ref-5">[5]</a></sup> That architecture is poorly suited to a system where renewable penetration, volatility and recurring price spreads may make merchant-style finance more plausible on some corridors over time.<sup class="citation"><a href="#ref-2">[2]</a></sup></p>
 
-      <p>EU law should therefore no longer treat all interconnectors as if they needed the same financing model. For corridors where market revenues are plausibly strong enough, Article 63 should offer a lighter route for merchant-style projects. And where pure merchant finance remains too risky, the EU should also allow intermediate de-risking tools, such as cap-and-floor regimes, InvestEU guarantees or similar mechanisms, to make private capital bankable without defaulting to full regulation.</p>
+      <p>This should remain a selective option, not a blanket liberalisation. Merchant or merchant-like models are most plausible on corridors with persistent price separation, repeated congestion and structurally different generation profiles, for example some hydro-to-thermal, wind-to-load or offshore integration corridors. Competition can help reduce the amount of public support needed, but only if there are enough credible bidders. Where competition is too weak, the result may simply be expensive support or poor project delivery. That is why a lighter route should be both selective and, where support is involved, genuinely competitive rather than automatic.</p>
+
+      <p>European Union law should therefore no longer treat all interconnectors as if they needed the same financing model. For corridors where market revenues are plausibly strong enough, Article 63 should offer a lighter route for merchant-style projects. Where pure merchant finance is too risky, the European Union could allow intermediate tools, such as cap-and-floor regimes, InvestEU guarantees or similar mechanisms. Once a corridor is identified as suitable for this track, the European Union, a national regulator or ACER could allocate the support instrument competitively, for example by awarding the project or the de-risking mechanism to the developer requiring the least public support.</p>
 
       <h2 id="section-3">3. Where partners are financially capable, the issue is cost allocation</h2>
 
       <p>When capital markets do not solve the financing problem, the obstacle is often not an absolute lack of money but a lack of agreement on who should pay. The existing cross-border cost allocation framework under TEN-E was meant to solve this problem, but Commission analysis shows that for cross-border electricity infrastructure, costs and benefits often do not align geographically. Countries that benefit from a project do not necessarily contribute in proportion to the benefits they receive, which leaves nationally borne costs at odds with wider system gains.<sup class="citation"><a href="#ref-2">[2]</a></sup></p>
 
-      <p>The proposed TEN-E revision, as part of the wider Grids Package, already moves in the right direction.<sup class="citation"><a href="#ref-6">[6]</a></sup> It strengthens the logic of benefit-based allocation and allows ex post adjustments. But it still leaves too much ambiguity when negotiation fails.</p>
+      <p>The proposed revision of the Regulation on trans-European energy infrastructure (TEN-E), as part of the wider Grids Package, already moves in the right direction.<sup class="citation"><a href="#ref-6">[6]</a></sup> It strengthens the logic of benefit-based allocation and allows ex post adjustments. But it still leaves too much ambiguity when negotiation fails.</p>
 
-      <p>The missing reform is a clearer fallback rule. When national regulators cannot agree within the legal deadline, ACER should be empowered to apply a standard allocation methodology under a more explicit legal mandate. The default should remain benefit-based, but with room for clearly defined flexibility where the upfront financing burden is sharply asymmetric.</p>
+      <p>The missing reform is a clearer fallback rule. When national regulators cannot agree within the legal deadline, the European Union Agency for the Cooperation of Energy Regulators should be empowered to apply a standard allocation methodology under a more explicit legal mandate. The default should remain benefit-based, but with room for clearly defined flexibility where the upfront financing burden is sharply asymmetric. That would make the framework more predictable without pretending that every dispute can be settled by ad hoc bargaining.</p>
 
-      <p>A further step would be to use congestion income more flexibly as a compensation instrument. A country facing tighter financing constraints could contribute less upfront and, in exchange, receive a smaller share of future congestion revenues, while the financially stronger side would bear more of the initial cost and recover part of it over time through a larger revenue share.</p>
+      <p>This only works if the underlying modelling is trusted. The cost-benefit analysis should therefore be run under a transparent and reproducible framework, with published code, assumptions, and standardised sensitivity tests. The European Network of Transmission System Operators for Electricity could continue to run the modelling, given its data and operational expertise, but under a methodology certified by the European Union Agency for the Cooperation of Energy Regulators against clear open-science requirements. That would not transfer planning to the European Union Agency for the Cooperation of Energy Regulators. It would mean that the agency validates the framework and publication standards so that Member States, regulators and outside analysts can scrutinise and, as far as possible, replicate the results.</p>
+
+      <p>A further step would be to use congestion income more flexibly as a compensation instrument. The purpose would be practical: to make deals easier to finance. A country facing tighter financing constraints could contribute less upfront and, in exchange, receive a smaller share of future congestion revenues, while the financially stronger side would bear more of the initial cost and recover part of it over time through a larger revenue share. This would make it easier to agree on projects where the main obstacle is the upfront burden rather than the long-term value of the interconnector. In legislative terms, this means the revision of the Regulation on trans-European energy infrastructure should define the default allocation framework and the fallback role of the European Union Agency for the Cooperation of Energy Regulators more clearly, while the electricity market rules should allow congestion-income sharing to be used more flexibly as part of cross-border cost allocation agreements.</p>
+
+      <p>A simple next analytical step would be to test this logic on a small number of corridors, comparing a host-country burden with a stylised benefit-based allocation and showing how much upfront pressure could be reduced through a different sharing of future congestion revenues.</p>
 
       <h2 id="section-4">4. Where credit-constrained projects need targeted public support</h2>
 
       <p>The hardest cases are projects with high strategic value but weak financing capacity on at least one side. These often involve smaller systems, islands, peripheral regions or countries facing fiscal and geopolitical constraints. In such cases, the market failure is not the lack of social value. It is the inability of the relevant entities to carry the financial risk.</p>
 
-      <p>The Great Sea Interconnector illustrates the problem. It is a roughly €2 billion project, backed by about €660 million of CEF support, and linked to the broader objective of ending Cyprus's energy isolation.<sup class="citation"><a href="#ref-7">[7]</a></sup> Yet it has faced repeated delays, disputes over cost sharing, suspended payments to Nexans by IPTO, and geopolitical complications linked to Turkish interference with survey work.<sup class="citation"><a href="#ref-8">[8]</a></sup> This is exactly the type of case where a generic support framework is inadequate.</p>
+      <p>The Great Sea Interconnector illustrates the problem. It is a roughly €2 billion project, backed by about €660 million of support from the Connecting Europe Facility for Energy, and linked to the broader objective of ending Cyprus's energy isolation.<sup class="citation"><a href="#ref-7">[7]</a></sup> Yet it has faced repeated delays, disputes over cost sharing, suspended payments to Nexans by Independent Power Transmission Operator (IPTO), and geopolitical complications linked to Turkish interference with survey work.<sup class="citation"><a href="#ref-8">[8]</a></sup> This is exactly the type of case where a generic support framework is inadequate.</p>
 
-      <p>A uniform grant logic does not reflect the difference between a large investment-grade TSO and a smaller or more constrained side. Public support should therefore be targeted where financing additionality is highest. This points toward more differentiated CEF-E co-financing rates, combined where necessary with EIB-backed risk-sharing instruments.<sup class="citation"><a href="#ref-9">[9]</a></sup><sup class="citation"><a href="#ref-2">[2]</a></sup></p>
+      <p>A uniform grant logic does not reflect the difference between a large investment-grade TSO and a smaller or more constrained side. Public support should therefore be targeted where financing additionality is highest. This points toward more differentiated co-financing rates under the Connecting Europe Facility for Energy, combined where necessary with risk-sharing instruments backed by the European Investment Bank.<sup class="citation"><a href="#ref-9">[9]</a></sup><sup class="citation"><a href="#ref-2">[2]</a></sup></p>
 
-      <p>A second gap is political and geopolitical risk. For strategically important interconnectors facing exceptional third-country interference or geopolitical disruption, the EU should explore a dedicated political-risk guarantee — similar to MIGA-style cover in the World Bank Group: not a general subsidy, but a targeted guarantee against clearly defined non-commercial risks.</p>
+      <p>A second gap is political and geopolitical risk. For strategically important interconnectors facing exceptional third-country interference or geopolitical disruption, the EU should explore a dedicated political-risk guarantee. The logic would be similar to Multilateral Investment Guarantee Agency (MIGA)-style cover in the World Bank Group: not a general subsidy, but a targeted guarantee against clearly defined non-commercial risks such as forced construction delays, route disruption, cancellation caused by geopolitical events, or sovereign actions that prevent the project from proceeding. In practice, this could be structured through the European Investment Bank, InvestEU or a dedicated European Union facility. The mechanism would reduce a category of risk that private investors, TSOs and even sovereigns often cannot price or absorb efficiently on their own.</p>
+
+      <h3>Illustrative synthesis</h3>
+
+      <p>Figures 1 and 2 provide an illustrative synthesis of the financing logic developed in Sections 1 to 4. They are included to make the triage framework more concrete, not to offer a fully validated project ranking, revenue forecast, or funding plan. Figure 1 shows how projects separate under the notebook's stylised commercial and credit screens. Figure 2 then translates that same classification into an equally stylised financing stack, showing why a uniform support logic is unlikely to be efficient.</p>
+
+      <figure class="figure-block" aria-labelledby="figure-1-caption">
+        <div class="figure-frame figure-frame--tall">
+          <iframe
+            src="./assets/charts/triage_scatter.html"
+            title="Figure 1. Financing triage of cross-border electricity interconnection projects"
+            loading="lazy"
+          ></iframe>
+        </div>
+        <figcaption class="figure-caption" id="figure-1-caption">
+          <p><strong>Figure 1. Financing triage of cross-border electricity interconnection projects</strong></p>
+          <p>Commercial viability ratio and binding credit-constraint score by project.</p>
+          <p><strong>Source:</strong> Author's calculations based on TYNDP 2024 and TYNDP 2022 project data, Ember hourly wholesale electricity prices, TSO annual reports and regulatory filings, CEER material, and sovereign fiscal and ratings data.</p>
+          <p><strong>Note:</strong> This is an illustrative classification figure. Each point represents a project. The x-axis shows the commercial viability ratio, defined as the estimated annual congestion-rent proxy divided by annualised CAPEX. The y-axis shows the binding credit-constraint score, defined as project CAPEX share divided by TSO RAB. The vertical threshold at 1.0 marks the commercial screen; the horizontal threshold at 0.15 marks the credit-constraint screen. Display caps are used for readability, and some projects remain unclassified where price or credit inputs are missing. See Supplementary Methodology.</p>
+          <p><strong>Limitations:</strong> The commercial ratio is a proxy, not a forward-looking merchant revenue model. It is based on historical price patterns and does not model the counterfactual market outcome that would prevail if the line were already in place. Credit capacity is partly estimated for smaller or unrated TSOs. Cross-border benefit allocation between Member States is not separately modelled, and multi-country projects are simplified in the current side-A/side-B framework.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="figure-block" aria-labelledby="figure-2-caption">
+        <div class="figure-frame figure-frame--medium">
+          <iframe
+            src="./assets/charts/aggregate_financing_stack.html"
+            title="Figure 2. Illustrative financing stack by financing track"
+            loading="lazy"
+          ></iframe>
+        </div>
+        <figcaption class="figure-caption" id="figure-2-caption">
+          <p><strong>Figure 2. Illustrative financing stack by financing track</strong></p>
+          <p>Aggregate financing needs by instrument under the current triage assumptions, EUR bn.</p>
+          <p><strong>Source:</strong> Author's calculations based on the notebook financing assumptions applied to the classified project pipeline.</p>
+          <p><strong>Note:</strong> This figure is illustrative and scenario-based. It aggregates assumed financing instruments by track under the current notebook calibration. Under that stylised allocation, Track 1 is financed by private capital, Track 2 by TSO balance sheets, and Track 3 by a mix of CEF grants, EIB loans, and TSO balance-sheet financing. It should be read as an analytical translation of the triage logic rather than as an observation of final financing structures.</p>
+          <p><strong>Limitations:</strong> These are assumed allocations, not actual commitments. Results depend on the classification thresholds, on stylised financing mixes within each track, and on simplified assumptions about how project costs and benefits are distributed across participating Member States. The chart should therefore be read as an illustration of the public-support logic, not as a funding forecast.</p>
+        </figcaption>
+      </figure>
 
       <h2 id="section-5">5. A practical legislative package</h2>
 
-      <p>The legislative sequence should be stated simply, because not all of these changes sit in the same file. The Commission presented the European Grids Package on 10 December 2025. Its core legislative pillar is the proposed TEN-E revision, which is the main live vehicle for changes to project selection, cost allocation and modelling governance. By contrast, changes to Regulation 2019/943 would more likely need to be taken up in a subsequent electricity-market file, while differentiated CEF-E financing will depend on the next MFF and CEF negotiations.<sup class="citation"><a href="#ref-6">[6]</a></sup><sup class="citation"><a href="#ref-10">[10]</a></sup> That broader financing critique is already present in the policy debate: recent analysis argues that the package improves planning and permitting, but still does not provide a sufficient plan to fund the grid build-out Europe needs.<sup class="citation"><a href="#ref-11">[11]</a></sup></p>
+      <p>Taken together, the two illustrative figures above show why Europe needs financing triage rather than a uniform support logic. The legislative sequence should therefore be stated simply, because not all of these changes sit in the same file. The Commission presented the European Grids Package on 10 December 2025. Its core legislative pillars are the proposed TEN-E revision and a separate permitting proposal. The proposed revision of the Regulation on trans-European energy infrastructure is therefore the main live vehicle for changes to project selection, cost allocation and modelling governance. That is where the most immediate amendments should be targeted. By contrast, changes to Regulation 2019/943 would more likely need to be taken up in a subsequent electricity-market file, while differentiated financing under the Connecting Europe Facility for Energy will depend on the next Multiannual Financial Framework and Connecting Europe Facility negotiations.<sup class="citation"><a href="#ref-6">[6]</a></sup><sup class="citation"><a href="#ref-10">[10]</a></sup> That broader financing critique is already present in the policy debate: recent analysis argues that the package improves planning and permitting, but still does not provide a sufficient plan to fund the grid build-out Europe needs.<sup class="citation"><a href="#ref-11">[11]</a></sup></p>
 
       <h3>In the TEN-E revision:</h3>
       <ul>
-        <li>Create a formal financing triage for PCI and PMI projects;</li>
-        <li>Add a clearer ACER fallback for CBCA deadlock;</li>
+        <li>Create a formal financing triage for projects of common interest and projects of mutual interest;</li>
+        <li>Add a clearer fallback role for the European Union Agency for the Cooperation of Energy Regulators in cases of cross-border cost allocation deadlock;</li>
         <li>Strengthen transparency requirements for the underlying cost-benefit analysis;</li>
         <li>Clarify that CBCA decisions can combine lower upfront contributions on one side with more flexible compensation over time.</li>
       </ul>
 
       <h3>In Regulation 2019/943 or a later electricity-market package:</h3>
       <ul>
-        <li>Create a lighter Article 63 pathway for selectively identified merchant-viable corridors;<sup class="citation"><a href="#ref-5">[5]</a></sup></li>
-        <li>Distinguish more clearly between merchant and hybrid de-risked models;</li>
-        <li>Allow more flexible use and sharing of congestion income within CBCA agreements.</li>
+        <li>Create a lighter Article 63 pathway for selectively identified corridors where merchant-style finance is viable;<sup class="citation"><a href="#ref-5">[5]</a></sup></li>
+        <li>Distinguish more clearly between merchant models and hybrid de-risked models;</li>
+        <li>Allow more flexible use and sharing of congestion income within CBCA agreements, with proper legal anchoring.</li>
       </ul>
 
       <h3>In the next CEF-E and MFF cycle:</h3>
       <ul>
         <li>Introduce differentiated co-financing rates based on financing need;<sup class="citation"><a href="#ref-9">[9]</a></sup></li>
         <li>Concentrate public support where financing additionality is highest;</li>
-        <li>Pair grants with EIB or InvestEU risk-sharing instruments where financing constraints, rather than project value, are the core obstacle.<sup class="citation"><a href="#ref-2">[2]</a></sup></li>
+        <li>Pair grants with risk-sharing instruments from the European Investment Bank or InvestEU where financing constraints, rather than project value, are the core obstacle.<sup class="citation"><a href="#ref-2">[2]</a></sup></li>
       </ul>
 
       <h2 id="conclusion">Conclusion</h2>
 
-      <p class="drop-cap">Europe's interconnection debate has moved beyond whether more cross-border capacity is needed. The harder question is how to finance it intelligently. Europe may well need more public money, but it also needs to make better use of the money already available. The answer is not one instrument, but three. Use markets selectively where markets can work. Use clearer allocation rules where capable partners cannot agree. Use public support and risk-sharing where financing constraints would otherwise block strategically valuable projects. That financing triage is still missing from Europe's current grid agenda.</p>
+      <p class="drop-cap">Europe's interconnection debate has moved beyond whether more cross-border capacity is needed. The harder question is how to finance it in a more effective way. Europe may well need more public money, but it also needs to make better use of the money already available. The answer is not one instrument, but three. Use markets selectively where markets can work. Use clearer allocation rules where capable countries cannot agree. Use public support and risk-sharing where financing constraints would otherwise block strategically valuable projects. That financing triage is still missing from Europe's current grid agenda.</p>
 
       <section class="references" id="references" aria-labelledby="references-title">
         <h2 id="references-title">References</h2>
@@ -785,6 +994,97 @@
           <li id="ref-10">EP Think Tank, <em>Guidelines for trans-European energy infrastructure: revision of the TEN-E regulation</em>, 26 January 2026. <a href="https://epthinktank.eu/2026/01/26/guidelines-for-trans-european-energy-infrastructure-revision-of-the-ten-e-regulation-eu-legislation-in-progress/" target="_blank" rel="noopener">Source</a></li>
           <li id="ref-11">Janek Steitz, Mediha Inan, and Niklas Illenseer, <em>Europe’s Grid Reckoning</em>, European Macro Policy Network, 18 December 2025. <a href="https://empn.eu/publication/europe-grid-reckoning/" target="_blank" rel="noopener">Source</a></li>
         </ol>
+      </section>
+
+      <section class="methodology" id="supplementary-methodology" aria-labelledby="supplementary-methodology-title">
+        <h2 id="supplementary-methodology-title">Supplementary Methodology</h2>
+
+        <div class="methodology-intro">
+          <p>This supplementary note summarises the main assumptions behind the notebook-based financing triage. It is intended as a transparent companion to the brief rather than as a final methodological paper.</p>
+          <p>The current implementation is strongest as a prototype screening framework. It is useful for structuring the financing argument, but several inputs still rely on simplifying assumptions and should be treated as provisional.</p>
+        </div>
+
+        <div class="methodology-block">
+          <h3>Sources</h3>
+          <ul class="compact-list">
+            <li><strong>TYNDP 2024 project sheets:</strong> project list, status, transfer capacity, CAPEX, and welfare results.</li>
+            <li><strong>TYNDP 2022 CBA:</strong> fallback welfare results where needed.</li>
+            <li><strong>Ember hourly wholesale electricity prices:</strong> used for the commercial screen.</li>
+            <li><strong>TSO annual reports, regulatory filings, and CEER material:</strong> used for TSO financial capacity, especially RAB.</li>
+            <li><strong>Sovereign fiscal data and ratings:</strong> used as an additional financing-capacity check.</li>
+          </ul>
+        </div>
+
+        <div class="methodology-block">
+          <h3>1. Social Benefit-Cost Ratio</h3>
+          <p>This is the first economic screen. It asks whether a project creates enough value for Europe as a whole to justify support, even if it is not commercially financeable.</p>
+          <span class="method-formula"><span class="method-formula__num">annual socio-economic welfare gain</span><span class="method-formula__bar"></span><span class="method-formula__den">annualised CAPEX</span></span>
+          <p>The welfare input comes from TYNDP. In the current implementation, the preferred source is the TYNDP 2024 2030NT-EU27 scenario, with fallback to other available 2024 and then 2022 welfare fields.</p>
+          <p class="methodology-note">This ratio does not determine the financing track on its own. It is used to assess whether an uncommercial project may still have a strong public case.</p>
+        </div>
+
+        <div class="methodology-block">
+          <h3>2. Commercial Ratio</h3>
+          <p>This asks whether the project could plausibly recover its cost from cross-border trading value.</p>
+          <span class="method-formula"><span class="method-formula__num">estimated annual congestion-rent proxy</span><span class="method-formula__bar"></span><span class="method-formula__den">annualised CAPEX</span></span>
+          <p>The congestion-rent proxy is based on hourly price differences, transfer capacity, and a 50 percent equivalent congestion-hour factor.</p>
+          <p class="methodology-note">This factor should not be read as physical utilisation of the line. It is a simplifying assumption for the share of the year during which the project is assumed able to monetise price spreads at full transfer capacity.</p>
+        </div>
+
+        <div class="methodology-block">
+          <h3>3. Credit-Constraint Score</h3>
+          <p>This asks whether the relevant transmission operators are large enough to carry their share of the project.</p>
+          <span class="method-formula"><span class="method-formula__num">project CAPEX share</span><span class="method-formula__bar"></span><span class="method-formula__den">TSO RAB</span></span>
+          <p><strong>RAB</strong> means regulated asset base. It is used here as a practical proxy for the size of the TSO balance sheet and therefore for financing capacity.</p>
+          <ol class="compact-list">
+            <li>The project CAPEX share is above 15 percent of TSO RAB.</li>
+            <li>The TSO is below investment grade.</li>
+            <li>The sovereign is fiscally constrained.</li>
+          </ol>
+        </div>
+
+        <div class="methodology-block">
+          <h3>4. Classification Logic</h3>
+          <ol class="compact-list">
+            <li><strong>Track 1:</strong> the commercial ratio is above 1.0.</li>
+            <li><strong>Track 2:</strong> the commercial ratio is not above 1.0, and the project is not credit-constrained.</li>
+            <li><strong>Track 3:</strong> the commercial ratio is not above 1.0, and at least one side is credit-constrained.</li>
+          </ol>
+          <p class="methodology-note">In practice, the model first asks whether the project looks commercially financeable. If not, it asks whether the regulated parties can still carry it. If they cannot, the project falls into the targeted-support track.</p>
+        </div>
+
+        <div class="methodology-block">
+          <h3>Participant Allocation Assumptions</h3>
+          <ul class="compact-list">
+            <li>Where no verified allocation is available, the model uses equal shares across participants.</li>
+            <li>For a standard two-country project, that means a default 50/50 split.</li>
+            <li>For multi-country projects, equal shares are only a placeholder, not a measured allocation.</li>
+            <li>The present implementation still reduces the credit screen to side A and side B, so additional participants in more complex corridors are not yet fully captured.</li>
+          </ul>
+        </div>
+
+        <div class="methodology-block">
+          <h3>Other Core Assumptions</h3>
+          <ul class="compact-list">
+            <li>CAPEX is annualised using a 5 percent discount rate over 25 years.</li>
+            <li>The commercial threshold for Track 1 is commercial ratio &gt; 1.0.</li>
+            <li>The credit threshold for Track 3 is credit-constraint score &gt; 0.15, unless the TSO rating or sovereign constraint already triggers the flag.</li>
+          </ul>
+        </div>
+
+        <div class="methodology-block">
+          <h3>Main Caveats</h3>
+          <ul class="compact-list">
+            <li>The hourly price input is a proxy for commercial value, not a forward-looking merchant revenue model.</li>
+            <li>The congestion-rent proxy is based on historical price spreads rather than on a model of how dispatch, congestion, and prices would change if the new transmission line were actually in place.</li>
+            <li>The method therefore does not estimate the counterfactual system outcome with the line built and may overstate or understate persistent congestion value.</li>
+            <li>Some TSO RAB values, especially for smaller or unrated TSOs, are estimated.</li>
+            <li>Participant shares are often assumed rather than taken from verified CBCA decisions.</li>
+            <li>The allocation of benefits between Member States is not modelled in a full benefit-sharing framework, even though that distribution is often central to the financing dispute.</li>
+            <li>Stylised financing allocations do not capture how grants, guarantees, and regulated cost recovery would interact in an actual negotiated package.</li>
+            <li>The current method is strongest for bilateral projects and less precise for multi-country corridors.</li>
+          </ul>
+        </div>
       </section>
 
     </article>
