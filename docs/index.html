@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Who Pays for Europe's Grid? — A financing triage for cross-border interconnection</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-bg: #ffffff;
+      --color-text: #1a1a1a;
+      --color-text-secondary: #555555;
+      --color-accent: #0693e3;
+      --color-accent-dark: #0570b0;
+      --color-border: #e0e0e0;
+      --color-bg-light: #f7f8fa;
+      --color-tag-bg: #eef3f8;
+      --color-tag-text: #2c5282;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+      --max-width: 720px;
+      --side-padding: 1.5rem;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      color: var(--color-text);
+      background: var(--color-bg);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Navigation ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--color-bg);
+      border-bottom: 1px solid var(--color-border);
+      padding: 0.75rem var(--side-padding);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    nav .logo {
+      font-family: var(--font-sans);
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--color-text);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    nav .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    nav .nav-links a {
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    nav .nav-links a:hover {
+      color: var(--color-accent);
+    }
+
+    /* ── Hero / Header ── */
+    .hero {
+      background: linear-gradient(135deg, #0b1d3a 0%, #163a6b 50%, #1a5276 100%);
+      color: #fff;
+      padding: 4rem var(--side-padding) 3.5rem;
+      text-align: center;
+    }
+
+    .hero .tags {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .hero .tag {
+      background: rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.9);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 0.3rem 0.75rem;
+      border-radius: 3px;
+    }
+
+    .hero h1 {
+      font-family: var(--font-serif);
+      font-size: 2.75rem;
+      font-weight: 700;
+      line-height: 1.2;
+      max-width: 800px;
+      margin: 0 auto 1rem;
+    }
+
+    .hero .subtitle {
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: rgba(255,255,255,0.8);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* ── Article Meta ── */
+    .article-meta {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 1.75rem var(--side-padding);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--color-border);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .author-info {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .author-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--color-accent);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .author-details .author-name {
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .author-details .author-name a {
+      color: var(--color-text);
+      text-decoration: none;
+    }
+
+    .author-details .author-name a:hover {
+      color: var(--color-accent);
+      text-decoration: underline;
+    }
+
+    .author-details .pub-date {
+      font-size: 0.8rem;
+      color: var(--color-text-secondary);
+    }
+
+    .share-links {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .share-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--color-bg-light);
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .share-links a:hover {
+      background: var(--color-accent);
+      color: #fff;
+    }
+
+    /* ── Layout: sidebar TOC + content ── */
+    .layout {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 2rem;
+      padding: 2rem var(--side-padding);
+    }
+
+    /* ── Table of Contents (sidebar) ── */
+    .toc {
+      position: sticky;
+      top: 4.5rem;
+      align-self: start;
+      font-size: 0.8rem;
+      max-height: calc(100vh - 6rem);
+      overflow-y: auto;
+    }
+
+    .toc-title {
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.7rem;
+      color: var(--color-text-secondary);
+      margin-bottom: 0.75rem;
+    }
+
+    .toc ol {
+      list-style: none;
+      counter-reset: toc-counter;
+    }
+
+    .toc ol li {
+      counter-increment: toc-counter;
+      margin-bottom: 0.5rem;
+    }
+
+    .toc ol li a {
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      display: block;
+      padding: 0.25rem 0;
+      line-height: 1.4;
+      transition: color 0.2s;
+    }
+
+    .toc ol li a:hover,
+    .toc ol li a.active {
+      color: var(--color-accent);
+    }
+
+    .toc ol li a::before {
+      content: counter(toc-counter) ". ";
+      font-weight: 600;
+      color: var(--color-accent);
+    }
+
+    /* ── Article Content ── */
+    .article-content {
+      max-width: var(--max-width);
+    }
+
+    .article-content h2 {
+      font-family: var(--font-serif);
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin: 2.5rem 0 1rem;
+      line-height: 1.3;
+      color: var(--color-text);
+    }
+
+    .article-content h2:first-child {
+      margin-top: 0;
+    }
+
+    .article-content h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin: 2rem 0 0.75rem;
+      color: var(--color-text);
+    }
+
+    .article-content p {
+      margin-bottom: 1.25rem;
+      font-size: 1.05rem;
+      line-height: 1.75;
+    }
+
+    .article-content ul, .article-content ol {
+      margin: 0.75rem 0 1.5rem 1.25rem;
+    }
+
+    .article-content li {
+      margin-bottom: 0.5rem;
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+
+    .article-content strong {
+      font-weight: 600;
+    }
+
+    /* ── Executive Summary Box ── */
+    .exec-summary {
+      background: var(--color-bg-light);
+      border-left: 4px solid var(--color-accent);
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 2rem;
+      border-radius: 0 6px 6px 0;
+    }
+
+    .exec-summary h2 {
+      font-family: var(--font-sans) !important;
+      font-size: 0.85rem !important;
+      font-weight: 700 !important;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--color-accent) !important;
+      margin: 0 0 1rem 0 !important;
+    }
+
+    .exec-summary p {
+      font-size: 1rem !important;
+      color: var(--color-text-secondary);
+    }
+
+    /* ── Callout / Key Point ── */
+    .callout {
+      background: #f0f7ff;
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 0.95rem;
+      color: var(--color-accent-dark);
+      line-height: 1.65;
+    }
+
+    /* ── Repo / Computation banner ── */
+    .repo-banner {
+      background: var(--color-bg-light);
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      margin: 2.5rem 0;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .repo-banner .icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .repo-banner p {
+      margin: 0 !important;
+      font-size: 0.9rem !important;
+      color: var(--color-text-secondary);
+    }
+
+    .repo-banner a {
+      color: var(--color-accent);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .repo-banner a:hover {
+      text-decoration: underline;
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--color-border);
+      padding: 2rem var(--side-padding);
+      text-align: center;
+      color: var(--color-text-secondary);
+      font-size: 0.8rem;
+      margin-top: 3rem;
+    }
+
+    footer a {
+      color: var(--color-accent);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 860px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+      .toc {
+        position: static;
+        border-bottom: 1px solid var(--color-border);
+        padding-bottom: 1.5rem;
+        margin-bottom: 1rem;
+      }
+      .hero h1 {
+        font-size: 2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero {
+        padding: 2.5rem var(--side-padding) 2rem;
+      }
+      .hero h1 {
+        font-size: 1.65rem;
+      }
+      .hero .subtitle {
+        font-size: 1rem;
+      }
+    }
+
+    /* ── Drop Cap ── */
+    .drop-cap::first-letter {
+      font-family: var(--font-serif);
+      float: left;
+      font-size: 4rem;
+      line-height: 0.8;
+      padding-right: 0.15em;
+      margin-top: 0.05em;
+      font-weight: 700;
+      color: var(--color-accent-dark);
+    }
+
+    /* ── Links in article ── */
+    .article-content a {
+      color: var(--color-accent);
+      text-decoration: underline;
+      text-decoration-color: rgba(6, 147, 227, 0.3);
+      text-underline-offset: 2px;
+      transition: text-decoration-color 0.2s;
+    }
+
+    .article-content a:hover {
+      text-decoration-color: var(--color-accent);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <a class="logo" href="#">GridFinancing</a>
+    <ul class="nav-links">
+      <li><a href="#">Policy Areas</a></li>
+      <li><a href="#">Publications</a></li>
+      <li><a href="#">About</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="tags">
+      <span class="tag">Energy Policy</span>
+      <span class="tag">European Grids</span>
+      <span class="tag">EN</span>
+    </div>
+    <h1>Who Pays for Europe's Grid?</h1>
+    <p class="subtitle">A financing triage for cross-border interconnection</p>
+  </header>
+
+  <!-- Author & Meta -->
+  <div class="article-meta">
+    <div class="author-info">
+      <div class="author-avatar">LV</div>
+      <div class="author-details">
+        <div class="author-name">By <a href="https://lucas-vivier.github.io/" target="_blank" rel="noopener">Lucas Vivier, PhD</a></div>
+        <div class="pub-date">March 2026</div>
+      </div>
+    </div>
+    <div class="share-links">
+      <a href="#" title="Share on LinkedIn">in</a>
+      <a href="#" title="Share on X">𝕏</a>
+      <a href="#" title="Copy link">🔗</a>
+    </div>
+  </div>
+
+  <!-- Layout: TOC + Content -->
+  <div class="layout">
+
+    <!-- Sidebar TOC -->
+    <aside class="toc">
+      <div class="toc-title">Contents</div>
+      <ol>
+        <li><a href="#exec-summary">Executive summary</a></li>
+        <li><a href="#section-1">Financing triage, not one-size-fits-all</a></li>
+        <li><a href="#section-2">Where markets can finance interconnectors</a></li>
+        <li><a href="#section-3">Where the issue is cost allocation</a></li>
+        <li><a href="#section-4">Credit-constrained projects</a></li>
+        <li><a href="#section-5">A practical legislative package</a></li>
+        <li><a href="#conclusion">Conclusion</a></li>
+      </ol>
+    </aside>
+
+    <!-- Article -->
+    <article class="article-content">
+
+      <div class="exec-summary" id="exec-summary">
+        <h2>Executive Summary</h2>
+        <p>Europe needs around €150 billion of investment in cross-border interconnection by 2040. Even with the Commission's proposal to raise CEF-Energy from about €6 billion in 2021-2027 to about €30 billion in 2028-2034, a substantial financing gap would still remain. That financing gap has been identified for years, but the pressure is now greater because rapid deployment of variable renewable electricity increases the value of moving faster.</p>
+        <p>The key policy question is no longer only how to build the grid, but how to pay for it intelligently. This paper argues that Europe does not face one interconnection financing problem, but three. Some corridors may be able to attract private capital if the regulatory framework is better adapted. Some projects are blocked because countries that could in principle finance them cannot agree on cost allocation. Others are stalled because one side cannot bear the upfront cost or associated risks, even where the long-term system value is high.</p>
+        <p>Europe will likely need both additional public resources and better mobilisation of private capital, but it also needs to use existing public money more efficiently. That requires targeting support to the projects that truly need it.</p>
+      </div>
+
+      <div class="repo-banner">
+        <span class="icon">📊</span>
+        <p>All calculations and computations supporting this analysis are available as open-source code at <a href="https://github.com/lucas-vivier/GridFinancing" target="_blank" rel="noopener">github.com/lucas-vivier/GridFinancing</a></p>
+      </div>
+
+      <h2 id="section-1">1. Europe needs financing triage, not one-size-fits-all support</h2>
+
+      <p class="drop-cap">Projects in the interconnection pipeline do not face the same implementation bottleneck. Some could attract private capital, but the current framework still treats merchant development as an exception. Some are blocked because countries that could in principle finance the project cannot agree on cost allocation. Others are stalled because one side cannot bear the upfront cost or associated risks. These three cases call for three different instruments.</p>
+
+      <ul>
+        <li><strong>Track 1: market-financeable projects.</strong> Corridors where expected congestion revenues and persistent price separation may support private investment, but where the current regulatory framework remains poorly suited to merchant-style development.</li>
+        <li><strong>Track 2: cost-allocation disputes between capable countries.</strong> Cases where the project is financeable in principle, but countries cannot agree on who should pay.</li>
+        <li><strong>Track 3: credit-constrained projects.</strong> Cases where at least one side lacks the borrowing capacity, sovereign backing or risk-bearing ability needed to proceed.</li>
+      </ul>
+
+      <div class="callout">
+        The current framework does not explicitly classify projects in this way. That is the missing piece. A smarter framework would link financing instruments to the actual bottleneck each project faces.
+      </div>
+
+      <h2 id="section-2">2. Where markets can finance interconnectors, EU law should get out of the way</h2>
+
+      <p>Some interconnectors can be financed largely or fully by private capital. That should not be overstated: the number of clear cases remains limited, and the model is not suitable for every corridor. But the evidence shows that merchant-style investment can work under the right conditions.</p>
+
+      <p>Merchant-style investment should not be understood as a single model. At one end is the pure merchant interconnector, where investors rely primarily on market revenues and bear most price and volume risk. ElecLink, between France and the United Kingdom through the Channel Tunnel, is the clearest recent example: it was developed as a privately financed interconnector and shows that strong congestion value can support market-based recovery, with revenue of about €560 million in 2023 and about €280 million in 2024 despite market normalisation and outages. BritNed, between the Netherlands and the United Kingdom, provides an earlier example of a merchant-style link operating under an exempted model. But private capital does not have to mean exposure to fully unhedged market risk. Intermediate arrangements can make revenues more predictable and therefore improve bankability. NeuConnect, between Germany and the United Kingdom, illustrates this through a cap-and-floor regime, which keeps a market-based logic while limiting downside and upside and can therefore make debt financing easier and reduce the cost of capital.</p>
+
+      <p>The problem is that EU law still treats the merchant route as an exception. Article 63 of Regulation 2019/943 requires case-by-case exemption and places a heavy evidentiary burden on the developer. That architecture is poorly suited to a system where renewable penetration, volatility and recurring price spreads may make merchant-style finance more plausible on some corridors over time.</p>
+
+      <p>EU law should therefore no longer treat all interconnectors as if they needed the same financing model. For corridors where market revenues are plausibly strong enough, Article 63 should offer a lighter route for merchant-style projects. And where pure merchant finance remains too risky, the EU should also allow intermediate de-risking tools, such as cap-and-floor regimes, InvestEU guarantees or similar mechanisms, to make private capital bankable without defaulting to full regulation.</p>
+
+      <h2 id="section-3">3. Where partners are financially capable, the issue is cost allocation</h2>
+
+      <p>When capital markets do not solve the financing problem, the obstacle is often not an absolute lack of money but a lack of agreement on who should pay. The existing cross-border cost allocation framework under TEN-E was meant to solve this problem, but in practice it has not done so effectively for electricity. ACER reports 65 percent fewer CBCA decisions in 2019-2024 than in 2014-2019, with costs still remaining national in most cases.</p>
+
+      <p>The proposed TEN-E revision, as part of the wider Grids Package, already moves in the right direction. It strengthens the logic of benefit-based allocation and allows ex post adjustments. But it still leaves too much ambiguity when negotiation fails.</p>
+
+      <p>The missing reform is a clearer fallback rule. When national regulators cannot agree within the legal deadline, ACER should be empowered to apply a standard allocation methodology under a more explicit legal mandate. The default should remain benefit-based, but with room for clearly defined flexibility where the upfront financing burden is sharply asymmetric.</p>
+
+      <p>A further step would be to use congestion income more flexibly as a compensation instrument. A country facing tighter financing constraints could contribute less upfront and, in exchange, receive a smaller share of future congestion revenues, while the financially stronger side would bear more of the initial cost and recover part of it over time through a larger revenue share.</p>
+
+      <h2 id="section-4">4. Where credit-constrained projects need targeted public support</h2>
+
+      <p>The hardest cases are projects with high strategic value but weak financing capacity on at least one side. These often involve smaller systems, islands, peripheral regions or countries facing fiscal and geopolitical constraints. In such cases, the market failure is not the lack of social value. It is the inability of the relevant entities to carry the financial risk.</p>
+
+      <p>The Great Sea Interconnector illustrates the problem. It is a roughly €2 billion project, backed by about €660 million of CEF support, and linked to the broader objective of ending Cyprus's energy isolation. Yet it has faced repeated delays, disputes over cost sharing, suspended payments to Nexans by IPTO, and geopolitical complications linked to Turkish interference with survey work. This is exactly the type of case where a generic support framework is inadequate.</p>
+
+      <p>A uniform grant logic does not reflect the difference between a large investment-grade TSO and a smaller or more constrained side. Public support should therefore be targeted where financing additionality is highest. This points toward more differentiated CEF-E co-financing rates, combined where necessary with EIB-backed risk-sharing instruments.</p>
+
+      <p>A second gap is political and geopolitical risk. For strategically important interconnectors facing exceptional third-country interference or geopolitical disruption, the EU should explore a dedicated political-risk guarantee — similar to MIGA-style cover in the World Bank Group: not a general subsidy, but a targeted guarantee against clearly defined non-commercial risks.</p>
+
+      <h2 id="section-5">5. A practical legislative package</h2>
+
+      <p>The legislative sequence should be stated simply, because not all of these changes sit in the same file. The Commission presented the European Grids Package on 10 December 2025.</p>
+
+      <h3>In the TEN-E revision:</h3>
+      <ul>
+        <li>Create a formal financing triage for PCI and PMI projects;</li>
+        <li>Add a clearer ACER fallback for CBCA deadlock;</li>
+        <li>Strengthen transparency requirements for the underlying cost-benefit analysis;</li>
+        <li>Clarify that CBCA decisions can combine lower upfront contributions on one side with more flexible compensation over time.</li>
+      </ul>
+
+      <h3>In Regulation 2019/943 or a later electricity-market package:</h3>
+      <ul>
+        <li>Create a lighter Article 63 pathway for selectively identified merchant-viable corridors;</li>
+        <li>Distinguish more clearly between merchant and hybrid de-risked models;</li>
+        <li>Allow more flexible use and sharing of congestion income within CBCA agreements.</li>
+      </ul>
+
+      <h3>In the next CEF-E and MFF cycle:</h3>
+      <ul>
+        <li>Introduce differentiated co-financing rates based on financing need;</li>
+        <li>Concentrate public support where financing additionality is highest;</li>
+        <li>Pair grants with EIB or InvestEU risk-sharing instruments where financing constraints, rather than project value, are the core obstacle.</li>
+      </ul>
+
+      <h2 id="conclusion">Conclusion</h2>
+
+      <p class="drop-cap">Europe's interconnection debate has moved beyond whether more cross-border capacity is needed. The harder question is how to finance it intelligently. Europe may well need more public money, but it also needs to make better use of the money already available. The answer is not one instrument, but three. Use markets selectively where markets can work. Use clearer allocation rules where capable partners cannot agree. Use public support and risk-sharing where financing constraints would otherwise block strategically valuable projects. That financing triage is still missing from Europe's current grid agenda.</p>
+
+    </article>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 <a href="https://lucas-vivier.github.io/" target="_blank" rel="noopener">Lucas Vivier</a> · All calculations available at <a href="https://github.com/lucas-vivier/GridFinancing" target="_blank" rel="noopener">GitHub</a></p>
+  </footer>
+
+</body>
+</html>
