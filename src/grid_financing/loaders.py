@@ -1,9 +1,12 @@
 from __future__ import annotations
 
+import logging
 import re
 import unicodedata
 from pathlib import Path
 from typing import Any, Iterable
+
+logger = logging.getLogger(__name__)
 
 import pandas as pd
 from openpyxl import load_workbook
@@ -138,10 +141,16 @@ def _parse_numeric_value(value: Any) -> float | pd.NA:
     numbers = [float(match) for match in matches]
     if len(numbers) == 1 or all(number == numbers[0] for number in numbers):
         return numbers[0]
+    logger.debug(
+        "Multi-value numeric cell %r resolved to max(%s) = %s",
+        value,
+        numbers,
+        max(numbers),
+    )
     return max(numbers)
 
 
-def _resolve_workbook(source_id: str) -> tuple[Path, str]:
+def _resolve_source_path(source_id: str) -> tuple[Path, str]:
     resolved = resolve_source(source_id)
     if not resolved.exists or resolved.path is None:
         raise FileNotFoundError(resolved.descriptor.missing_message)
@@ -154,14 +163,13 @@ def _validate_sheet_signature(df: pd.DataFrame, workbook_key: str, sheet_name: s
 
 
 def load_transmission_projects() -> pd.DataFrame:
-    path, variant = _resolve_workbook("tyndp2024_workbook")
+    path, variant = _resolve_source_path("tyndp2024_workbook")
     df = read_excel_table(path, "Trans.Projects", header_rows=(2,), data_start_row=3)
     _validate_sheet_signature(df, "tyndp2024", "Trans.Projects")
     df = _coerce_numeric_columns(
         df,
         (
             "project_id",
-            "commissioning_year_estimated_by_the_promoter",
             "status_id_1_under_consideration_2_in_planning_but_not_permitting_3_in_permitting_4_under_construction",
             "transfer_capacity_increase_a_b_mw",
             "transfer_capacity_increase_b_a_mw",
@@ -188,7 +196,7 @@ def load_transmission_projects() -> pd.DataFrame:
 
 
 def load_transmission_investments() -> pd.DataFrame:
-    path, variant = _resolve_workbook("tyndp2024_workbook")
+    path, variant = _resolve_source_path("tyndp2024_workbook")
     df = read_excel_table(path, "Trans.Investments", header_rows=(2,), data_start_row=3)
     _validate_sheet_signature(df, "tyndp2024", "Trans.Investments")
     df = _coerce_numeric_columns(
@@ -205,7 +213,7 @@ def load_transmission_investments() -> pd.DataFrame:
 
 
 def load_tyndp_2024_cba() -> pd.DataFrame:
-    path, variant = _resolve_workbook("tyndp2024_workbook")
+    path, variant = _resolve_source_path("tyndp2024_workbook")
     outputs = []
     for sheet_name, prefix in (
         ("2030NT-EU27", "2030nt_eu27"),
@@ -253,7 +261,7 @@ def load_tyndp_2024_cba() -> pd.DataFrame:
 
 
 def load_tyndp_2022_cba() -> pd.DataFrame:
-    path, variant = _resolve_workbook("tyndp2022_workbook")
+    path, variant = _resolve_source_path("tyndp2022_workbook")
     outputs = []
     for sheet_name, prefix in (
         ("NT2030_EU", "nt2030_2022"),
@@ -319,6 +327,19 @@ def parse_country_codes(value: Any) -> list[str]:
     return [item.strip() for item in re.split(r"[;/,]", str(value)) if item and item.strip()]
 
 
+def _join_unique_strings(values: pd.Series) -> str:
+    return " | ".join(
+        dict.fromkeys(str(value).strip() for value in values if pd.notna(value) and str(value).strip())
+    )
+
+
+def _first_non_null(values: pd.Series) -> Any:
+    return next(
+        (value for value in values if pd.notna(value) and str(value).strip()),
+        pd.NA,
+    )
+
+
 def _collapse_project_rows(df: pd.DataFrame) -> pd.DataFrame:
     if "project_id" not in df.columns:
         return df
@@ -333,14 +354,9 @@ def _collapse_project_rows(df: pd.DataFrame) -> pd.DataFrame:
         if pd.api.types.is_numeric_dtype(df[column]):
             aggregations[column] = "max"
         elif column == "project_name":
-            aggregations[column] = lambda values: " | ".join(
-                dict.fromkeys(str(value).strip() for value in values if pd.notna(value) and str(value).strip())
-            )
+            aggregations[column] = _join_unique_strings
         else:
-            aggregations[column] = lambda values: next(
-                (value for value in values if pd.notna(value) and str(value).strip()),
-                pd.NA,
-            )
+            aggregations[column] = _first_non_null
 
     return df.groupby("project_id", as_index=False).agg(aggregations)
 
@@ -463,7 +479,7 @@ def _attach_credit_reference(project_df: pd.DataFrame, participants_df: pd.DataF
     for side in ("a", "b"):
         country_column = f"country_{side}"
         if country_column not in df.columns:
-            df[country_column] = df[country_column] if country_column in df.columns else df[f"country_{side}"]
+            df[country_column] = pd.NA
         side_credit = credit.drop_duplicates("country_code").rename(
             columns={
                 "country_code": country_column,
@@ -506,7 +522,7 @@ def _attach_credit_reference(project_df: pd.DataFrame, participants_df: pd.DataF
 
 
 def load_local_hourly_price_data() -> pd.DataFrame:
-    path, variant = _resolve_workbook("local_hourly_prices")
+    path, variant = _resolve_source_path("local_hourly_prices")
     df = pd.read_csv(path)
     ensure_columns_present(df.columns, SOURCE_REGISTRY["local_hourly_prices"].schema, "local_hourly_prices")
     df["price_eur_per_mwh"] = pd.to_numeric(df["Price (EUR/MWhe)"], errors="coerce")
@@ -580,10 +596,10 @@ def build_price_metrics(
         border_map["project_id"] = pd.to_numeric(border_map["project_id"], errors="coerce")
         border_map_lookup = border_map.set_index("project_id").to_dict("index")
 
-    for row in project_df.itertuples(index=False):
-        mapped = border_map_lookup.get(row.project_id, {})
-        country_a = mapped.get("country_a") or getattr(row, "country_a", None)
-        country_b = mapped.get("country_b") or getattr(row, "country_b", None)
+    for _, row in project_df.iterrows():
+        mapped = border_map_lookup.get(row["project_id"], {})
+        country_a = mapped.get("country_a") or row.get("country_a")
+        country_b = mapped.get("country_b") or row.get("country_b")
         metrics: dict[str, Any]
         if pd.isna(country_a) or pd.isna(country_b) or not str(country_a).strip() or not str(country_b).strip():
             metrics = {"notes": "Missing border mapping for price metrics."}
@@ -591,7 +607,7 @@ def build_price_metrics(
             metrics = _build_pair_metrics(price_df, str(country_a), str(country_b))
         rows.append(
             {
-                "project_id": row.project_id,
+                "project_id": row["project_id"],
                 "price_scenario": mapped.get("price_scenario", "historical_proxy"),
                 "zone_a": mapped.get("zone_a"),
                 "zone_b": mapped.get("zone_b"),
@@ -647,7 +663,6 @@ def build_project_master_table(*, development_mode: bool = True) -> pd.DataFrame
 
 def pipeline_report(project_df: pd.DataFrame) -> dict[str, Any]:
     return {
-        "project_count": int(project_df["project_id"].nunique()),
         "cross_border_count": int(project_df["project_id"].nunique()),
         "blank_transfer_capacity_count": int(project_df["data_quality_flags"].fillna("").str.contains("missing_transfer_capacity").sum()),
         "unmapped_multi_country_count": int(project_df["data_quality_flags"].fillna("").str.contains("multi_country_needs_participants").sum()),

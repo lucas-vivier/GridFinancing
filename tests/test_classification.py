@@ -28,6 +28,17 @@ def test_classify_project_insufficient_data() -> None:
     assert classify_project(pd.NA, True) == UNCLASSIFIED
 
 
+def test_classify_project_boundary_at_exactly_0_7() -> None:
+    assert classify_project(0.7, False) == TRACK_2
+    assert classify_project(0.7, True) == TRACK_3
+
+
+def test_classify_project_manual_override() -> None:
+    assert classify_project(0.9, False, manual_track_override="Track 3: forced") == "Track 3: forced"
+    assert classify_project(0.2, True, manual_track_override=pd.NA) == TRACK_3
+    assert classify_project(0.2, True, manual_track_override="") == TRACK_3
+
+
 def test_classification_ignores_social_bcr_and_applies_financing_defaults() -> None:
     df = pd.DataFrame(
         [
