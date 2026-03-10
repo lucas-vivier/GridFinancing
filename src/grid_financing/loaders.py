@@ -703,7 +703,8 @@ def build_project_master_table(*, development_mode: bool = True, price_years: It
     master["data_quality_flags"] = ""
     master["assumptions_note"] = (
         "Capacity uses the larger directional transfer-capacity value when both are present. "
-        "Price metrics default to the local hourly CSV in development mode."
+        "Price metrics default to the local hourly CSV in development mode. "
+        "Estimated congestion rent is a majorant based on the sum of absolute hourly price spreads."
     )
     master["price_input_mode"] = "development-local-proxy" if development_mode else "manual-or-external"
     if development_mode and price_years is not None:

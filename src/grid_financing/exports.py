@@ -132,7 +132,7 @@ def export_outputs(project_df: pd.DataFrame, *, base_path: Path = PROJECT_ROOT) 
             "credit_constraint_score": "Credit constraint score",
         },
     )
-    scatter_fig.add_vline(x=0.7)
+    scatter_fig.add_vline(x=1.0)
     scatter_fig.add_hline(y=0.15)
     scatter_fig.write_html(scatter_html)
 

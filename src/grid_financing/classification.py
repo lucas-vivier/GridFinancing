@@ -13,7 +13,7 @@ def classify_project(
     credit_constrained: object,
     *,
     manual_track_override: object = None,
-    commercial_threshold: float = 0.7,
+    commercial_threshold: float = 1.0,
 ) -> str:
     if manual_track_override is not None and not pd.isna(manual_track_override) and str(manual_track_override).strip():
         return str(manual_track_override)
@@ -65,7 +65,7 @@ def estimate_financing_stack(
 def classify_projects(
     project_df: pd.DataFrame,
     *,
-    commercial_threshold: float = 0.7,
+    commercial_threshold: float = 1.0,
 ) -> pd.DataFrame:
     df = project_df.copy()
     df["financing_track"] = df.apply(

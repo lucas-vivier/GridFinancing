@@ -13,24 +13,24 @@ from grid_financing.classification import (
 
 
 def test_classify_project_track_1() -> None:
-    assert classify_project(0.71, False) == TRACK_1
+    assert classify_project(1.01, False) == TRACK_1
 
 
 def test_classify_project_track_2() -> None:
-    assert classify_project(0.69, False) == TRACK_2
+    assert classify_project(0.99, False) == TRACK_2
 
 
 def test_classify_project_track_3() -> None:
-    assert classify_project(0.69, True) == TRACK_3
+    assert classify_project(0.99, True) == TRACK_3
 
 
 def test_classify_project_insufficient_data() -> None:
     assert classify_project(pd.NA, True) == UNCLASSIFIED
 
 
-def test_classify_project_boundary_at_exactly_0_7() -> None:
-    assert classify_project(0.7, False) == TRACK_2
-    assert classify_project(0.7, True) == TRACK_3
+def test_classify_project_boundary_at_exactly_1_0() -> None:
+    assert classify_project(1.0, False) == TRACK_2
+    assert classify_project(1.0, True) == TRACK_3
 
 
 def test_classify_project_manual_override() -> None:
@@ -44,7 +44,7 @@ def test_classification_ignores_social_bcr_and_applies_financing_defaults() -> N
         [
             {
                 "project_id": 1,
-                "commercial_ratio": 0.71,
+                "commercial_ratio": 1.01,
                 "credit_constrained": True,
                 "social_bcr": 10,
                 "capex_meur": 100,

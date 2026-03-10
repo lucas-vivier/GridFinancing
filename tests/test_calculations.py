@@ -19,6 +19,11 @@ def test_capital_recovery_factor_matches_spec_default() -> None:
     assert math.isclose(crf, 0.058278, rel_tol=1e-4)
 
 
+def test_capital_recovery_factor_matches_new_default_horizon() -> None:
+    crf = capital_recovery_factor(0.05, 25)
+    assert math.isclose(crf, 0.070952, rel_tol=1e-4)
+
+
 def test_congestion_rent_formula() -> None:
     rent = estimated_annual_congestion_rent(10, 1000, 0.60)
     assert math.isclose(rent, 52.56, rel_tol=1e-6)
